@@ -15,10 +15,10 @@ import '../utils/debouncer.dart';
 /// Smart Select State
 abstract class S2State<T> extends State<SmartSelect<T>> {
   /// State of the selected choice(s)
-  S2Selected<T> get selected;
+  S2Selected<T?> get selected;
 
   /// State of choice(s) selection in the modal
-  covariant S2Selection<T>? selection;
+  covariant S2Selection<T?>? selection;
 
   /// State of the choice items
   S2Choices<T>? choices;
