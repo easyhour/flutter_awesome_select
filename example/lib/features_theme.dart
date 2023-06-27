@@ -92,7 +92,7 @@ class _FeaturesThemeState extends State<FeaturesTheme> {
             title: 'Color',
             selectedValue: _themeColor,
             onChange: (selected) {
-              setState(() => _themeColor = selected.value);
+              setState(() => _themeColor = selected.value!);
               ThemePatrol.of(context)?.setColor(_themeColor);
             },
             choiceItems: S2Choice.listFrom<Color, Color>(
