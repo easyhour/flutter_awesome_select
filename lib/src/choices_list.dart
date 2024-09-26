@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'model/choice_config.dart';
+
 import 'choice_divider.dart';
+import 'model/choice_config.dart';
 import 'scrollbar.dart';
 
 /// Choices list widget
@@ -18,6 +19,9 @@ class S2ChoicesList<T> extends StatelessWidget {
 
   /// Configuration of single choice widget
   final S2ChoiceConfig config;
+
+  /// The scroll controller to match Scrollbar() and ListView()
+  final scrollController = ScrollController();
 
   /// Default constructor
   S2ChoicesList({
@@ -51,6 +55,7 @@ class S2ChoicesList<T> extends StatelessWidget {
     return SingleChildScrollView(
       controller: scrollController,
       physics: config.physics,
+      controller: scrollController,
       scrollDirection: config.direction,
       padding: config.padding ??
           const EdgeInsets.symmetric(
@@ -75,6 +80,7 @@ class S2ChoicesList<T> extends StatelessWidget {
     return ListView.builder(
       controller: scrollController,
       shrinkWrap: true,
+      controller: scrollController,
       physics: config.physics,
       scrollDirection: config.direction,
       padding: config.padding ?? const EdgeInsets.symmetric(vertical: 10.0),
@@ -88,6 +94,7 @@ class S2ChoicesList<T> extends StatelessWidget {
       controller: scrollController,
       shrinkWrap: true,
       physics: config.physics,
+      controller: scrollController,
       scrollDirection: config.direction,
       padding: config.padding ?? const EdgeInsets.symmetric(vertical: 10.0),
       itemCount: itemLength,
@@ -101,6 +108,7 @@ class S2ChoicesList<T> extends StatelessWidget {
       controller: scrollController,
       shrinkWrap: true,
       physics: config.physics,
+      controller: scrollController,
       scrollDirection: config.direction,
       padding: config.padding ?? const EdgeInsets.all(10.0),
       itemCount: itemLength,

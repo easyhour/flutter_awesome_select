@@ -31,6 +31,9 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
   /// State setter of the modal
   StateSetter? modalSetState;
 
+  /// The scroll controller to match Scrollbar() and ListView()
+  final scrollController = ScrollController();
+
   /// Returns the validation function to validate the [selected] choice
   get validation;
 
