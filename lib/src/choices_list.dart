@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'model/choice_config.dart';
+
 import 'choice_divider.dart';
+import 'model/choice_config.dart';
 import 'scrollbar.dart';
 
 /// Choices list widget
@@ -17,8 +18,11 @@ class S2ChoicesList<T> extends StatelessWidget {
   /// Configuration of single choice widget
   final S2ChoiceConfig config;
 
+  /// The scroll controller to match Scrollbar() and ListView()
+  final scrollController = ScrollController();
+
   /// Default constructor
-  const S2ChoicesList({
+  S2ChoicesList({
     Key? key,
     required this.itemLength,
     required this.itemBuilder,
@@ -31,6 +35,7 @@ class S2ChoicesList<T> extends StatelessWidget {
     Widget result = NotificationListener<ScrollNotification>(
       onNotification: (notification) => false,
       child: Scrollbar(
+        controller: scrollController,
         child: config.isWrapLayout
             ? _listWrap(context)
             : config.isGridLayout
@@ -49,6 +54,7 @@ class S2ChoicesList<T> extends StatelessWidget {
   Widget _listWrap(BuildContext context) {
     return SingleChildScrollView(
       physics: config.physics,
+      controller: scrollController,
       scrollDirection: config.direction,
       padding: config.padding ??
           const EdgeInsets.symmetric(
@@ -72,6 +78,7 @@ class S2ChoicesList<T> extends StatelessWidget {
   Widget _listDefault() {
     return ListView.builder(
       shrinkWrap: true,
+      controller: scrollController,
       physics: config.physics,
       scrollDirection: config.direction,
       padding: config.padding ?? const EdgeInsets.symmetric(vertical: 10.0),
@@ -84,6 +91,7 @@ class S2ChoicesList<T> extends StatelessWidget {
     return ListView.separated(
       shrinkWrap: true,
       physics: config.physics,
+      controller: scrollController,
       scrollDirection: config.direction,
       padding: config.padding ?? const EdgeInsets.symmetric(vertical: 10.0),
       itemCount: itemLength,
@@ -96,6 +104,7 @@ class S2ChoicesList<T> extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: config.physics,
+      controller: scrollController,
       scrollDirection: config.direction,
       padding: config.padding ?? const EdgeInsets.all(10.0),
       itemCount: itemLength,
