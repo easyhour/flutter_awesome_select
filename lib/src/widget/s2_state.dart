@@ -99,7 +99,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
   bool get isSingleChoice => !isMultiChoice;
 
   /// Returns [ThemeData] from the widget context
-  ThemeData get theme => Theme.of(context);
+  ThemeData? get theme => Theme.of(context);
 
   /// Returns the default style for unselected choice
   S2ChoiceStyle get defaultChoiceStyle {
@@ -107,7 +107,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
       titleStyle: const TextStyle(),
       subtitleStyle: const TextStyle(),
       control: S2ChoiceControl.platform,
-      highlightColor: theme.highlightColor.withOpacity(.7),
+      highlightColor: theme?.highlightColor.withOpacity(.7),
     );
   }
 
@@ -127,7 +127,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
   S2GroupConfig get groupConfig {
     return widget.groupConfig.copyWith(
       headerStyle: S2GroupHeaderStyle(
-        backgroundColor: theme.cardColor,
+        backgroundColor: theme?.cardColor,
         padding: widget.groupConfig.useSelector == true
             ? const EdgeInsets.fromLTRB(16, 0, 12, 0)
             : const EdgeInsets.symmetric(horizontal: 16.0),
@@ -140,12 +140,12 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
     return widget.modalConfig.copyWith(
       headerStyle: S2ModalHeaderStyle(
         backgroundColor:
-            widget.modalConfig.isFullPage != true ? theme.cardColor : null,
+            widget.modalConfig.isFullPage != true ? theme?.cardColor : null,
         textStyle: widget.modalConfig.isFullPage != true
-            ? theme.textTheme.titleLarge
-            : theme.primaryTextTheme.titleLarge,
+            ? theme?.textTheme.titleLarge
+            : theme?.primaryTextTheme.titleLarge,
         iconTheme:
-            widget.modalConfig.isFullPage != true ? theme.iconTheme : null,
+            widget.modalConfig.isFullPage != true ? theme?.iconTheme : null,
         errorStyle: const TextStyle(
           fontSize: 13.5,
           fontWeight: FontWeight.w500,
@@ -285,7 +285,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
       style: modalHeaderStyle.textStyle,
       cursorColor: modalConfig.isFullPage
           ? Colors.white
-          : theme.textSelectionTheme.cursorColor,
+          : theme?.textSelectionTheme.cursorColor,
       textInputAction: TextInputAction.search,
       decoration: InputDecoration.collapsed(
         hintText: modalConfig.filterHint ?? 'Search on $title',

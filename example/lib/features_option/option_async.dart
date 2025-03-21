@@ -173,7 +173,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
               isTwoLine: true,
               isLoading: state.selected.isResolving,
               leading: CircleAvatar(
-                backgroundColor: state.theme.primaryColor,
+                backgroundColor: state.theme?.primaryColor,
                 child: Text((state.selected.length).toString()),
               ),
             );
