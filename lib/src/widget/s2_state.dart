@@ -99,7 +99,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
   bool get isSingleChoice => !isMultiChoice;
 
   /// Returns [ThemeData] from the widget context
-  ThemeData? get theme => Theme.of(context);
+  ThemeData? get theme => context != null ? Theme.of(context) : null;
 
   /// Returns the default style for unselected choice
   S2ChoiceStyle get defaultChoiceStyle {
