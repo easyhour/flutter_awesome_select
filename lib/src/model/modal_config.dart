@@ -79,6 +79,15 @@ class S2ModalConfig with Diagnosticable {
   /// Configure modal header style
   final S2ModalHeaderStyle headerStyle;
 
+  /// The semantic label for the search button
+  final String? searchSemanticLabel;
+
+  /// The semantic label for the clear-search button
+  final String? clearSemanticLabel;
+
+  /// The semantic label for the confirm button
+  final String? confirmSemanticLabel;
+
   /// Create modal configuration
   const S2ModalConfig({
     this.type = S2ModalType.fullPage,
@@ -100,6 +109,9 @@ class S2ModalConfig with Diagnosticable {
     this.barrierColor,
     this.style = const S2ModalStyle(),
     this.headerStyle = const S2ModalHeaderStyle(),
+    this.searchSemanticLabel,
+    this.clearSemanticLabel,
+    this.confirmSemanticLabel,
   }) : assert(maxHeightFactor > 0 && maxHeightFactor <= 1);
 
   /// Returns true if the modal type is full page
@@ -139,6 +151,9 @@ class S2ModalConfig with Diagnosticable {
     Color? barrierColor,
     S2ModalStyle? style,
     S2ModalHeaderStyle? headerStyle,
+    String? searchSemanticLabel,
+    String? clearSemanticLabel,
+    String? confirmSemanticLabel,
   }) {
     return S2ModalConfig(
       type: type ?? this.type,
@@ -162,6 +177,9 @@ class S2ModalConfig with Diagnosticable {
       headerStyle: headerStyle == null
           ? this.headerStyle
           : this.headerStyle.merge(headerStyle),
+      searchSemanticLabel: searchSemanticLabel ?? this.searchSemanticLabel,
+      clearSemanticLabel: clearSemanticLabel ?? this.clearSemanticLabel,
+      confirmSemanticLabel: confirmSemanticLabel ?? this.confirmSemanticLabel,
     );
   }
 
@@ -191,6 +209,9 @@ class S2ModalConfig with Diagnosticable {
       barrierColor: other.barrierColor,
       style: other.style,
       headerStyle: other.headerStyle,
+      searchSemanticLabel: other.searchSemanticLabel,
+      clearSemanticLabel: other.clearSemanticLabel,
+      confirmSemanticLabel: other.confirmSemanticLabel,
     );
   }
 }
