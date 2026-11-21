@@ -1,10 +1,12 @@
-import 'package:awesomeselect/theme/theme.dart';
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select_example/theme/theme.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 class FeaturesColor extends StatefulWidget {
+  const FeaturesColor({super.key});
+
   @override
-  _FeaturesColorState createState() => _FeaturesColorState();
+  State<FeaturesColor> createState() => _FeaturesColorState();
 }
 
 class _FeaturesColorState extends State<FeaturesColor> {
@@ -40,10 +42,7 @@ class _FeaturesColorState extends State<FeaturesColor> {
           child: InkWell(
             onTap: () => choice.select?.call(true),
             child: choice.selected
-                ? Icon(
-                    Icons.check,
-                    color: Colors.white,
-                  )
+                ? Icon(Icons.check, color: Colors.white)
                 : Container(),
           ),
         );

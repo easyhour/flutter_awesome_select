@@ -1,3 +1,11 @@
+## 7.0.0
+
+- First public release under the `brilliant_select` package name, forked from `awesome_select`.
+- Require Flutter 3.50 and Dart 3.14; migrate Material/Cupertino imports to standalone UI packages.
+- Update runtime, development and example dependency constraints; modernize examples and analysis.
+- Retain source-fork fixes, original licenses and public widget/model names.
+- Add the `brilliant_select.dart` entrypoint, preserve the previous barrel as a compatibility export, and document the breaking consumer migration.
+
 ## [6.0.0]
 * Update to Flutter 3
 

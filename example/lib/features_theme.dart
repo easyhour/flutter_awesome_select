@@ -1,10 +1,12 @@
-import 'package:awesome_select/awesome_select.dart';
-import 'package:awesomeselect/theme/theme.dart';
-import 'package:flutter/material.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+import 'package:brilliant_select_example/theme/theme.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FeaturesTheme extends StatefulWidget {
+  const FeaturesTheme({super.key});
+
   @override
-  _FeaturesThemeState createState() => _FeaturesThemeState();
+  State<FeaturesTheme> createState() => _FeaturesThemeState();
 }
 
 class _FeaturesThemeState extends State<FeaturesTheme> {
@@ -77,16 +79,13 @@ class _FeaturesThemeState extends State<FeaturesTheme> {
                 trailing: ThemePatrol.of(context)?.isLightMode ?? false
                     ? const Icon(Icons.brightness_low)
                     : ThemePatrol.of(context)?.isDarkMode ?? false
-                        ? const Icon(Icons.brightness_2)
-                        : const Icon(Icons.brightness_auto),
+                    ? const Icon(Icons.brightness_2)
+                    : const Icon(Icons.brightness_auto),
               );
             },
           ),
         ),
-        const SizedBox(
-          height: 40,
-          child: VerticalDivider(width: 1),
-        ),
+        const SizedBox(height: 40, child: VerticalDivider(width: 1)),
         Expanded(
           child: SmartSelect<Color>.single(
             title: 'Color',
@@ -112,10 +111,7 @@ class _FeaturesThemeState extends State<FeaturesTheme> {
                 child: InkWell(
                   onTap: () => choice.select?.call(true),
                   child: choice.selected
-                      ? Icon(
-                          Icons.check,
-                          color: Colors.white,
-                        )
+                      ? Icon(Icons.check, color: Colors.white)
                       : Container(),
                 ),
               );
@@ -128,10 +124,7 @@ class _FeaturesThemeState extends State<FeaturesTheme> {
                 isTwoLine: true,
                 trailing: Card(
                   color: _themeColor,
-                  child: const SizedBox(
-                    width: 24,
-                    height: 24,
-                  ),
+                  child: const SizedBox(width: 24, height: 24),
                 ),
               );
             },

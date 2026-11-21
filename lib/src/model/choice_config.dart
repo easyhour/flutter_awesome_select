@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import './choice_theme.dart';
 
 /// Type of choice input
@@ -29,7 +30,7 @@ enum S2ChoiceLayout {
   wrap,
 
   /// use grid view widget
-  grid
+  grid,
 }
 
 /// Choices configuration

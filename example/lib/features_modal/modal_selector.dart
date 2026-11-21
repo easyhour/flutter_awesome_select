@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesModalSelector extends StatefulWidget {
+  const FeaturesModalSelector({super.key});
+
   @override
-  _FeaturesModalSelectorState createState() => _FeaturesModalSelectorState();
+  State<FeaturesModalSelector> createState() => _FeaturesModalSelectorState();
 }
 
 class _FeaturesModalSelectorState extends State<FeaturesModalSelector> {
@@ -48,7 +51,7 @@ class _FeaturesModalSelectorState extends State<FeaturesModalSelector> {
               Padding(
                 padding: const EdgeInsets.only(right: 13),
                 child: state.choiceSelectorAll,
-              )
+              ),
             ];
           },
           modalDividerBuilder: (context, state) {
@@ -69,16 +72,18 @@ class _FeaturesModalSelectorState extends State<FeaturesModalSelector> {
                   ),
                   const SizedBox(width: 5),
                   TextButton(
-                    child: Text('OK (${state.selection?.length ?? 0})'),
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all<Color>(
-                          Theme.of(context).primaryColor),
+                        Theme.of(context).primaryColor,
+                      ),
                       textStyle: WidgetStateProperty.all<TextStyle>(
-                          TextStyle(color: Colors.white)),
+                        TextStyle(color: Colors.white),
+                      ),
                     ),
                     onPressed: (state.selection?.isValid ?? true)
                         ? () => state.closeModal(confirmed: true)
                         : null,
+                    child: Text('OK (${state.selection?.length ?? 0})'),
                   ),
                 ],
               ),
@@ -107,45 +112,46 @@ class _FeaturesModalSelectorState extends State<FeaturesModalSelector> {
           modalFilter: true,
           modalType: S2ModalType.fullPage,
           modalFooterBuilder: (context, state) {
-            return Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ActionButton(
-                    label: const Text('All/None'),
-                    onTap: () {
-                      state.selection?.toggle(state.choices?.items ?? []);
-                    },
-                  ),
-                  ActionButton(
-                    label: const Text('Low End'),
-                    onTap: () {
-                      state.selection?.choice = state.choices?.items
-                          ?.where(
-                              (item) => item.meta['category'] == 'Budget Phone')
-                          .toList();
-                    },
-                  ),
-                  ActionButton(
-                    label: const Text('Mid End'),
-                    onTap: () {
-                      state.selection?.choice = state.choices?.items
-                          ?.where((item) =>
-                              item.meta['category'] == 'Mid End Phone')
-                          .toList();
-                    },
-                  ),
-                  ActionButton(
-                    label: const Text('High End'),
-                    onTap: () {
-                      state.selection?.choice = state.choices?.items
-                          ?.where((item) =>
-                              item.meta['category'] == 'Flagship Phone')
-                          .toList();
-                    },
-                  ),
-                ],
-              ),
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ActionButton(
+                  label: const Text('All/None'),
+                  onTap: () {
+                    state.selection?.toggle(state.choices?.items ?? []);
+                  },
+                ),
+                ActionButton(
+                  label: const Text('Low End'),
+                  onTap: () {
+                    state.selection?.choice = state.choices?.items
+                        ?.where(
+                          (item) => item.meta['category'] == 'Budget Phone',
+                        )
+                        .toList();
+                  },
+                ),
+                ActionButton(
+                  label: const Text('Mid End'),
+                  onTap: () {
+                    state.selection?.choice = state.choices?.items
+                        ?.where(
+                          (item) => item.meta['category'] == 'Mid End Phone',
+                        )
+                        .toList();
+                  },
+                ),
+                ActionButton(
+                  label: const Text('High End'),
+                  onTap: () {
+                    state.selection?.choice = state.choices?.items
+                        ?.where(
+                          (item) => item.meta['category'] == 'Flagship Phone',
+                        )
+                        .toList();
+                  },
+                ),
+              ],
             );
           },
           tileBuilder: (context, state) {
@@ -185,10 +191,7 @@ class _FeaturesModalSelectorState extends State<FeaturesModalSelector> {
             title: (index, item) => item['title'] ?? '',
             group: (index, item) => item['brand'] ?? '',
           ),
-          groupConfig: S2GroupConfig(
-            enabled: true,
-            useSelector: true,
-          ),
+          groupConfig: S2GroupConfig(enabled: true, useSelector: true),
           modalConfig: S2ModalConfig(
             type: S2ModalType.bottomSheet,
             maxHeightFactor: .7,
@@ -237,23 +240,21 @@ class ActionButton extends StatelessWidget {
   final Widget label;
   final VoidCallback onTap;
 
-  ActionButton({
-    Key? key,
-    required this.label,
-    required this.onTap,
-  }) : super(key: key);
+  const ActionButton({super.key, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: label,
       style: ButtonStyle(
-        backgroundColor:
-            WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+        backgroundColor: WidgetStateProperty.all<Color>(
+          Theme.of(context).primaryColor,
+        ),
         textStyle: WidgetStateProperty.all<TextStyle>(
-            TextStyle(color: Colors.white)),
+          TextStyle(color: Colors.white),
+        ),
       ),
       onPressed: onTap,
+      child: label,
     );
   }
 }

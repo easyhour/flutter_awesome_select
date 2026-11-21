@@ -1,15 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 class FeaturesOptionListOfMap extends StatefulWidget {
+  const FeaturesOptionListOfMap({super.key});
+
   @override
-  _FeaturesOptionListOfMapState createState() =>
+  State<FeaturesOptionListOfMap> createState() =>
       _FeaturesOptionListOfMapState();
 }
 
 class _FeaturesOptionListOfMapState extends State<FeaturesOptionListOfMap> {
   List<String> _day = ['fri'];
-  List<Map<String, String>> _days = [
+  final List<Map<String, String>> _days = [
     {'value': 'mon', 'title': 'Monday'},
     {'value': 'tue', 'title': 'Tuesday'},
     {'value': 'wed', 'title': 'Wednesday'},

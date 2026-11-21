@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../widgets/icon_badge.dart';
 import '../choices.dart' as choices;
 
 class FeaturesTileLeading extends StatefulWidget {
+  const FeaturesTileLeading({super.key});
+
   @override
-  _FeaturesTileLeadingState createState() => _FeaturesTileLeadingState();
+  State<FeaturesTileLeading> createState() => _FeaturesTileLeadingState();
 }
 
 class _FeaturesTileLeadingState extends State<FeaturesTileLeading> {
@@ -65,7 +68,7 @@ class _FeaturesTileLeadingState extends State<FeaturesTileLeading> {
               leading: CircleAvatar(
                 backgroundColor: primaryColor,
                 child: Text(
-                  '${state.selected.toString()[0]}',
+                  state.selected.toString()[0],
                   style: TextStyle(color: Colors.white),
                 ),
               ),

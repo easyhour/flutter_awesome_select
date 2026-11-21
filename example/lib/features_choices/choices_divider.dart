@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesChoicesDivider extends StatefulWidget {
+  const FeaturesChoicesDivider({super.key});
+
   @override
-  _FeaturesChoicesDividerState createState() => _FeaturesChoicesDividerState();
+  State<FeaturesChoicesDivider> createState() => _FeaturesChoicesDividerState();
 }
 
 class _FeaturesChoicesDividerState extends State<FeaturesChoicesDivider> {
@@ -56,9 +59,7 @@ class _FeaturesChoicesDividerState extends State<FeaturesChoicesDivider> {
             group: (index, item) => item['brand'] ?? '',
           ),
           choiceGrouped: true,
-          choiceConfig: const S2ChoiceConfig(
-            useDivider: true,
-          ),
+          choiceConfig: const S2ChoiceConfig(useDivider: true),
           modalType: S2ModalType.bottomSheet,
           modalFilter: true,
           tileBuilder: (context, state) {

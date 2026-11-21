@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import 'choices.dart' as choices;
 
 void main() {
@@ -8,10 +9,7 @@ void main() {
     title:
         'Full page modal, default tile and radio choices displayed correctly',
     initialChoice: [],
-    choiceToSelect: [
-      choices.days[3],
-      choices.days[0],
-    ],
+    choiceToSelect: [choices.days[3], choices.days[0]],
     choiceItems: choices.days,
     modalType: S2ModalType.fullPage,
     choiceType: S2ChoiceType.checkboxes,
@@ -22,10 +20,7 @@ void main() {
         'Bottomsheet modal, default tile and chips choices displayed correctly',
     placeholder: 'Pilih Salah Satu',
     initialChoice: [],
-    choiceToSelect: [
-      choices.heroes[1],
-      choices.heroes[2],
-    ],
+    choiceToSelect: [choices.heroes[1], choices.heroes[2]],
     choiceItems: choices.heroes,
     modalType: S2ModalType.popupDialog,
     choiceType: S2ChoiceType.chips,
@@ -62,11 +57,7 @@ void testSmartSelect<T>({
     final s2Finder = find.byWidgetPredicate((widget) {
       return widget is SmartSelect<T>;
     });
-    expect(
-      s2Finder,
-      findsOneWidget,
-      reason: 'SmartSelect widget is displayed',
-    );
+    expect(s2Finder, findsOneWidget, reason: 'SmartSelect widget is displayed');
 
     final s2State = tester.state<S2MultiState<T>>(s2Finder);
     expect(
@@ -89,21 +80,13 @@ void testSmartSelect<T>({
       of: s2Finder,
       matching: find.text(title),
     );
-    expect(
-      tileTitleFinder,
-      findsOneWidget,
-      reason: 'Tile title displayed',
-    );
+    expect(tileTitleFinder, findsOneWidget, reason: 'Tile title displayed');
 
     final tileValueFinder = find.descendant(
       of: s2Finder,
       matching: find.text(s2State.selected.toString()),
     );
-    expect(
-      tileValueFinder,
-      findsOneWidget,
-      reason: 'Tile value displayed',
-    );
+    expect(tileValueFinder, findsOneWidget, reason: 'Tile value displayed');
 
     // Open the choice modal
     await tester.tap(tileFinder);
@@ -119,11 +102,7 @@ void testSmartSelect<T>({
         return widget is Scaffold;
       }
     });
-    expect(
-      modalFinder,
-      findsOneWidget,
-      reason: 'Modal displayed',
-    );
+    expect(modalFinder, findsOneWidget, reason: 'Modal displayed');
 
     final choiceWrapperFinder = find.byWidgetPredicate((widget) {
       if (choiceType == S2ChoiceType.chips) {
@@ -201,20 +180,13 @@ void testSmartSelect<T>({
 class Bootstrap extends StatelessWidget {
   final Widget child;
 
-  const Bootstrap({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const Bootstrap({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart Select Test',
-      home: Scaffold(
-        body: Center(
-          child: child,
-        ),
-      ),
+      home: Scaffold(body: Center(child: child)),
     );
   }
 }

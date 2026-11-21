@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesSingleSwitches extends StatefulWidget {
+  const FeaturesSingleSwitches({super.key});
+
   @override
-  _FeaturesSingleSwitchesState createState() => _FeaturesSingleSwitchesState();
+  State<FeaturesSingleSwitches> createState() => _FeaturesSingleSwitchesState();
 }
 
 class _FeaturesSingleSwitchesState extends State<FeaturesSingleSwitches> {

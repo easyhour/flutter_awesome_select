@@ -13,7 +13,7 @@ class Debouncer {
   Debouncer({this.delay = const Duration(milliseconds: 300)});
 
   /// run the function
-  run(Function action, {Duration? delay}) {
+  void run(Function action, {Duration? delay}) {
     _timer?.cancel();
     _timer = Timer(delay ?? this.delay, action as void Function());
   }

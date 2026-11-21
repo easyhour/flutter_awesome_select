@@ -1,12 +1,14 @@
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../choices.dart' as choices;
 
 class FeaturesChoicesBuilder extends StatefulWidget {
+  const FeaturesChoicesBuilder({super.key});
+
   @override
-  _FeaturesChoicesBuilderState createState() => _FeaturesChoicesBuilderState();
+  State<FeaturesChoicesBuilder> createState() => _FeaturesChoicesBuilderState();
 }
 
 class _FeaturesChoicesBuilderState extends State<FeaturesChoicesBuilder> {
@@ -55,10 +57,7 @@ class _FeaturesChoicesBuilderState extends State<FeaturesChoicesBuilder> {
                         CircleAvatar(
                           backgroundImage: NetworkImage(choice.meta['image']),
                           child: choice.selected
-                              ? Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                )
+                              ? Icon(Icons.check, color: Colors.white)
                               : null,
                         ),
                         const SizedBox(height: 5),
@@ -76,14 +75,13 @@ class _FeaturesChoicesBuilderState extends State<FeaturesChoicesBuilder> {
             );
           },
           tileBuilder: (context, state) {
-            String avatar = (state.selected.choice?.meta ?? {})['image'] ??
+            String avatar =
+                (state.selected.choice?.meta ?? {})['image'] ??
                 'https://source.unsplash.com/3k5cAmxjXl4/100x100';
             return S2Tile.fromState(
               state,
               isTwoLine: true,
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(avatar),
-              ),
+              leading: CircleAvatar(backgroundImage: NetworkImage(avatar)),
             );
           },
         ),
@@ -131,7 +129,7 @@ class _FeaturesChoicesBuilderState extends State<FeaturesChoicesBuilder> {
                           color: choice.selected ? Colors.white : null,
                           height: 1,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -192,14 +190,15 @@ class _FeaturesChoicesBuilderState extends State<FeaturesChoicesBuilder> {
         _users = S2Choice.listFrom<String, dynamic>(
           source: res.data['results'],
           value: (index, item) => item['email'],
-          title: (index, item) => item['name']['first'] + ' ' + item['name']['last'],
+          title: (index, item) =>
+              "${item['name']['first']} ${item['name']['last']}",
           subtitle: (index, item) => item['email'],
           group: (index, item) => item['gender'],
           meta: (index, item) => item,
         );
       });
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     } finally {
       setState(() => _usersIsLoading = false);
     }

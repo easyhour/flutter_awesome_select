@@ -1,10 +1,12 @@
-import 'package:awesomeselect/theme/theme.dart';
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select_example/theme/theme.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 class FeaturesBrightness extends StatefulWidget {
+  const FeaturesBrightness({super.key});
+
   @override
-  _FeaturesBrightnessState createState() => _FeaturesBrightnessState();
+  State<FeaturesBrightness> createState() => _FeaturesBrightnessState();
 }
 
 class _FeaturesBrightnessState extends State<FeaturesBrightness> {

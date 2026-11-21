@@ -1,12 +1,9 @@
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// A common widget builder
-typedef S2WidgetBuilder<T> = Widget Function(
-  BuildContext context,
-  T value,
-);
+typedef S2WidgetBuilder<T> = Widget Function(BuildContext context, T value);
 
 /// A common list of widget builder
 typedef S2ListWidgetBuilder<T> = List<Widget> Function(
@@ -112,14 +109,10 @@ class S2SingleBuilder<T> extends S2Builder<T> {
     this.choiceSubtitle,
     this.choiceSecondary,
     this.choiceEmpty,
-    IndexedWidgetBuilder? choiceDivider,
+    super.choiceDivider,
     // WidgetBuilder choiceProgress,
     // S2ChoiceBuilder<T> choicePager,
-  }) : super(
-          choiceDivider: choiceDivider,
-          // choiceProgressBuilder: choiceProgressBuilder,
-          // choicePagerBuilder: choicePagerBuilder,
-        );
+  });
 
   /// Creates a copy of this [S2SingleBuilder] but with
   /// the given fields replaced with the new values.
@@ -265,14 +258,10 @@ class S2MultiBuilder<T> extends S2Builder<T> {
     this.choiceSubtitle,
     this.choiceSecondary,
     this.choiceEmpty,
-    IndexedWidgetBuilder? choiceDivider,
+    super.choiceDivider,
     // WidgetBuilder choiceProgress,
     // S2ChoiceBuilder<T> choicePager,
-  }) : super(
-          choiceDivider: choiceDivider,
-          // choiceProgressBuilder: choiceProgressBuilder,
-          // choicePagerBuilder: choicePagerBuilder,
-        );
+  });
 
   /// Creates a copy of this [S2MultiBuilder] but with
   /// the given fields replaced with the new values.

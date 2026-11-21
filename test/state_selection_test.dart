@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 void main() {
   group('Single Choice', () {
@@ -8,8 +8,10 @@ void main() {
     // the listener call counter
     late int counter;
     // choice to select
-    S2Choice<String> choiceToSelect =
-        S2Choice<String>(value: 'new-value', title: 'New Value');
+    S2Choice<String> choiceToSelect = S2Choice<String>(
+      value: 'new-value',
+      title: 'New Value',
+    );
 
     setUp(() {
       counter = 0;

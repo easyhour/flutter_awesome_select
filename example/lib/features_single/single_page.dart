@@ -1,11 +1,13 @@
-import 'package:awesome_select/awesome_select.dart';
-import 'package:flutter/material.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../choices.dart' as choices;
 
 class FeaturesSinglePage extends StatefulWidget {
+  const FeaturesSinglePage({super.key});
+
   @override
-  _FeaturesSinglePageState createState() => _FeaturesSinglePageState();
+  State<FeaturesSinglePage> createState() => _FeaturesSinglePageState();
 }
 
 class _FeaturesSinglePageState extends State<FeaturesSinglePage> {

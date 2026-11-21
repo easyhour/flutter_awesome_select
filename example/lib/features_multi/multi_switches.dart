@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesMultiSwitches extends StatefulWidget {
+  const FeaturesMultiSwitches({super.key});
+
   @override
-  _FeaturesMultiSwitchesState createState() => _FeaturesMultiSwitchesState();
+  State<FeaturesMultiSwitches> createState() => _FeaturesMultiSwitchesState();
 }
 
 class _FeaturesMultiSwitchesState extends State<FeaturesMultiSwitches> {

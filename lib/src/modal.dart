@@ -5,11 +5,7 @@ class S2Modal extends StatefulWidget {
   /// Creates a widget that both has state and delegates its build to a callback.
   ///
   /// The [builder] argument must not be null.
-  const S2Modal({
-    Key? key,
-    required this.builder,
-    required this.onReady,
-  }) : super(key: key);
+  const S2Modal({super.key, required this.builder, required this.onReady});
 
   /// Called to obtain the child widget.
   ///

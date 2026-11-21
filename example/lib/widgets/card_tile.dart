@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CardTile extends StatelessWidget {
   final String title;
@@ -6,22 +6,20 @@ class CardTile extends StatelessWidget {
   final Image thumb;
   final VoidCallback onTap;
 
-  CardTile({
-    Key? key,
+  const CardTile({
+    super.key,
     required this.title,
     required this.value,
     required this.thumb,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
       margin: EdgeInsets.all(10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       child: Container(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -33,37 +31,29 @@ class CardTile extends StatelessWidget {
               child: thumb,
             ),
             Expanded(
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.merge(TextStyle(color: Colors.black54)),
-                    ),
-                    Container(height: 5),
-                    Text(
-                      value,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall
-                          ?.merge(TextStyle(color: Colors.black38)),
-                    ),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge
+                        ?.merge(TextStyle(color: Colors.black54)),
+                  ),
+                  Container(height: 5),
+                  Text(
+                    value,
+                    style: Theme.of(context).textTheme.titleSmall
+                        ?.merge(TextStyle(color: Colors.black38)),
+                  ),
+                ],
               ),
             ),
-            Container(
-              child: Center(
-                child: IconButton(
-                  icon: Icon(Icons.arrow_drop_down_circle),
-                  onPressed: onTap,
-                ),
+            Center(
+              child: IconButton(
+                icon: Icon(Icons.arrow_drop_down_circle),
+                onPressed: onTap,
               ),
-            )
+            ),
           ],
         ),
       ),

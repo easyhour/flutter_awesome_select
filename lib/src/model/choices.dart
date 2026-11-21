@@ -25,9 +25,9 @@ class S2Choices<T> {
     final q = query;
     return q != null
         ? nonHiddenItems
-            .where((S2Choice<T> item) => item.contains(q))
-            .toList()
-            .cast<S2Choice<T>>()
+              .where((S2Choice<T> item) => item.contains(q))
+              .toList()
+              .cast<S2Choice<T>>()
         : nonHiddenItems;
   }
 
@@ -42,11 +42,13 @@ class S2Choices<T> {
   /// return a list of group
   List<S2Group<T>> get groups {
     final List<S2Group<T>> groups = groupKeys
-        .map((String groupKey) => S2Group<T>(
-              name: groupKey,
-              choices: groupItems(groupKey),
-              headerStyle: groupConfig.headerStyle,
-            ))
+        .map(
+          (String groupKey) => S2Group<T>(
+            name: groupKey,
+            choices: groupItems(groupKey),
+            headerStyle: groupConfig.headerStyle,
+          ),
+        )
         .toList()
         .cast<S2Group<T>>();
 

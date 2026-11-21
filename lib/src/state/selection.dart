@@ -1,13 +1,17 @@
+// Preserve the upstream covariant single/multiple-selection field API.
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/foundation.dart';
+
 import '../model/choice_item.dart';
 
 /// State of choice(s) selection
 abstract class S2Selection<T> extends ChangeNotifier {
   /// The initial selection
-  covariant var initial;
+  covariant dynamic initial;
 
   /// A Function used to validate the selection(s)
-  covariant var validation;
+  covariant dynamic validation;
 
   /// Reset the current selection to the initial selection
   void reset();
@@ -46,18 +50,18 @@ abstract class S2Selection<T> extends ChangeNotifier {
   bool get isNotEmpty;
 
   /// Returns choice(s) in the current selection
-  get choice;
+  dynamic get choice;
 
   /// Override choice(s) in the current selection with a new value(s), and validate it
-  set choice(covariant var choice);
+  set choice(covariant dynamic choice);
 
-  get value;
+  dynamic get value;
 
-  get title;
+  dynamic get title;
 
-  get subtitle;
+  dynamic get subtitle;
 
-  get group;
+  dynamic get group;
 
   /// Returns a string that can be used as display,
   /// returns error message if is not valid,
@@ -77,10 +81,8 @@ class S2SingleSelection<T> extends S2Selection<T> {
   final S2Validation<S2Choice<T>>? validation;
 
   /// Default constructor
-  S2SingleSelection({
-    required this.initial,
-    this.validation,
-  }) : _choice = initial;
+  S2SingleSelection({required this.initial, this.validation})
+    : _choice = initial;
 
   /// The choice of the current selection
   S2Choice<T>? _choice;
@@ -165,11 +167,9 @@ class S2MultiSelection<T> extends S2Selection<T> {
   final S2Validation<List<S2Choice<T>>>? validation;
 
   /// Default constructor
-  S2MultiSelection({
-    required List<S2Choice<T>>? initial,
-    this.validation,
-  })  : initial = List.from(initial ?? []),
-        _choice = List.from(initial ?? []);
+  S2MultiSelection({required List<S2Choice<T>>? initial, this.validation})
+    : initial = List.from(initial ?? []),
+      _choice = List.from(initial ?? []);
 
   /// The choice(s) of the current selection
   List<S2Choice<T>> _choice;

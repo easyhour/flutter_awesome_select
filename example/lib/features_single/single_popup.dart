@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesSinglePopup extends StatefulWidget {
+  const FeaturesSinglePopup({super.key});
+
   @override
-  _FeaturesSinglePopupState createState() => _FeaturesSinglePopupState();
+  State<FeaturesSinglePopup> createState() => _FeaturesSinglePopupState();
 }
 
 class _FeaturesSinglePopupState extends State<FeaturesSinglePopup> {
@@ -49,7 +52,7 @@ class _FeaturesSinglePopupState extends State<FeaturesSinglePopup> {
               leading: CircleAvatar(
                 backgroundColor: Theme.of(context).primaryColor,
                 child: Text(
-                  '${state.selected.toString()[0]}',
+                  state.selected.toString()[0],
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 class FeaturesOptionListOfString extends StatefulWidget {
+  const FeaturesOptionListOfString({super.key});
+
   @override
-  _FeaturesOptionListOfStringState createState() =>
+  State<FeaturesOptionListOfString> createState() =>
       _FeaturesOptionListOfStringState();
 }
 
@@ -13,16 +15,16 @@ class _FeaturesOptionListOfStringState
 
   int? _sort = 3;
 
-  List<String> _categoriesOption = [
+  final List<String> _categoriesOption = [
     'Electronics',
     'Accessories',
     'Smartwatch',
     'Smartphone',
     'Audio & Video',
-    'Scientific'
+    'Scientific',
   ];
 
-  List<String> _sortOption = [
+  final List<String> _sortOption = [
     'Popular',
     'Most Reviews',
     'Newest',
@@ -67,10 +69,7 @@ class _FeaturesOptionListOfStringState
                   },
                 ),
               ),
-              const SizedBox(
-                height: 40,
-                child: VerticalDivider(),
-              ),
+              const SizedBox(height: 40, child: VerticalDivider()),
               Expanded(
                 child: SmartSelect<int?>.single(
                   title: 'Sort By',

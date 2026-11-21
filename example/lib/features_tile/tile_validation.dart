@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesTileValidation extends StatefulWidget {
+  const FeaturesTileValidation({super.key});
+
   @override
-  _FeaturesTileValidationState createState() => _FeaturesTileValidationState();
+  State<FeaturesTileValidation> createState() => _FeaturesTileValidationState();
 }
 
 class _FeaturesTileValidationState extends State<FeaturesTileValidation> {
@@ -28,10 +31,7 @@ class _FeaturesTileValidationState extends State<FeaturesTileValidation> {
             return '';
           },
           tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isTwoLine: true,
-            );
+            return S2Tile.fromState(state, isTwoLine: true);
           },
         ),
         const Divider(indent: 20),
@@ -47,10 +47,7 @@ class _FeaturesTileValidationState extends State<FeaturesTileValidation> {
             return '';
           },
           tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isTwoLine: true,
-            );
+            return S2Tile.fromState(state, isTwoLine: true);
           },
         ),
         const SizedBox(height: 7),

@@ -1,3 +1,6 @@
+// Preserve the upstream covariant single/multiple-selection field API.
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/widgets.dart';
 
 import '../model/choice_item.dart';
@@ -7,7 +10,8 @@ typedef S2SingleSelectedResolver<T> = Future<S2Choice<T>> Function(T value);
 
 /// Function to return a `List` of [S2Choice] from a `List` of `value`
 typedef S2MultiSelectedResolver<T> = Future<List<S2Choice<T>>> Function(
-    List<T>? value);
+  List<T>? value,
+);
 
 /// State of the selected choice
 abstract class S2Selected<T> extends ChangeNotifier {
@@ -15,10 +19,10 @@ abstract class S2Selected<T> extends ChangeNotifier {
   String? placeholder;
 
   /// Function to resolve [choice] from [value]
-  covariant var resolver;
+  covariant dynamic resolver;
 
   /// A Function used to validate the selection(s)
-  covariant var validation;
+  covariant dynamic validation;
 
   /// Returns the length of the [choice]
   int get length;
@@ -30,20 +34,20 @@ abstract class S2Selected<T> extends ChangeNotifier {
   bool get isNotEmpty;
 
   /// Override the selected choice with a new one, and validate it
-  set choice(covariant var choice);
+  set choice(covariant dynamic choice);
 
   /// Override the selected value with a new one, and validate it
-  set value(covariant var value);
+  set value(covariant dynamic value);
 
-  get choice;
+  dynamic get choice;
 
-  get value;
+  dynamic get value;
 
-  get title;
+  dynamic get title;
 
-  get subtitle;
+  dynamic get subtitle;
 
-  get group;
+  dynamic get group;
 
   /// validate the selected
   void validate() {
@@ -71,7 +75,7 @@ abstract class S2Selected<T> extends ChangeNotifier {
 
   /// Resolve [choice] from [value] using user defined [resolver],
   /// or fallback to [defaultResolver] if [resolver] is not defined
-  resolve();
+  void resolve();
 
   // /// Creates a copy of this [S2Selected] but with
   // /// the given fields replaced with the new values.
@@ -96,13 +100,12 @@ abstract class S2Selected<T> extends ChangeNotifier {
 class S2SingleSelected<T> extends S2Selected<T> {
   /// Default constructor
   S2SingleSelected({
-    required T value,
-    S2Choice<T>? choice,
+    required this._value,
+    this._choice,
     this.resolver,
     this.validation,
     this.placeholder,
-  })  : _value = value,
-        _choice = choice;
+  });
 
   T _value;
 
@@ -130,9 +133,7 @@ class S2SingleSelected<T> extends S2Selected<T> {
   bool get isNotEmpty => choice != null;
 
   @override
-  void resolve({
-    S2SingleSelectedResolver<T>? defaultResolver,
-  }) async {
+  void resolve({S2SingleSelectedResolver<T>? defaultResolver}) async {
     if (isResolved) return null;
 
     isResolving = true;
@@ -197,8 +198,8 @@ class S2SingleSelected<T> extends S2Selected<T> {
     return isResolving == true
         ? 'Resolving'
         : isValid == true
-            ? title ?? placeholder ?? 'Select one'
-            : error;
+        ? title ?? placeholder ?? 'Select one'
+        : error;
   }
 }
 
@@ -211,8 +212,8 @@ class S2MultiSelected<T> extends S2Selected<T> {
     this.resolver,
     this.validation,
     this.placeholder,
-  })  : _value = List<T>.from(value ?? []),
-        _choice = choice != null ? List<S2Choice<T>>.from(choice) : null;
+  }) : _value = List<T>.from(value ?? []),
+       _choice = choice != null ? List<S2Choice<T>>.from(choice) : null;
 
   List<T> _value;
 
@@ -240,9 +241,7 @@ class S2MultiSelected<T> extends S2Selected<T> {
   bool get isNotEmpty => choice != null && choice?.isNotEmpty == true;
 
   @override
-  void resolve({
-    S2MultiSelectedResolver<T>? defaultResolver,
-  }) async {
+  void resolve({S2MultiSelectedResolver<T>? defaultResolver}) async {
     if (isResolved) return null;
 
     isResolving = true;
@@ -316,7 +315,7 @@ class S2MultiSelected<T> extends S2Selected<T> {
     return isResolving == true
         ? 'Resolving'
         : isValid == true
-            ? title?.join(', ') ?? placeholder ?? 'Select one or more'
-            : error;
+        ? title?.join(', ') ?? placeholder ?? 'Select one or more'
+        : error;
   }
 }

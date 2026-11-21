@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesMultiChips extends StatefulWidget {
+  const FeaturesMultiChips({super.key});
+
   @override
-  _FeaturesMultiChipsState createState() => _FeaturesMultiChipsState();
+  State<FeaturesMultiChips> createState() => _FeaturesMultiChipsState();
 }
 
 class _FeaturesMultiChipsState extends State<FeaturesMultiChips> {
@@ -81,12 +84,8 @@ class _FeaturesMultiChipsState extends State<FeaturesMultiChips> {
           onChange: (selected) => setState(() => _day = selected.value),
           choiceItems: choices.days,
           choiceType: S2ChoiceType.chips,
-          choiceStyle: S2ChoiceStyle(
-            outlined: true,
-          ),
-          choiceActiveStyle: S2ChoiceStyle(
-            raised: true,
-          ),
+          choiceStyle: S2ChoiceStyle(outlined: true),
+          choiceActiveStyle: S2ChoiceStyle(raised: true),
           modalType: S2ModalType.popupDialog,
           tileBuilder: (context, state) {
             return S2Tile.fromState(

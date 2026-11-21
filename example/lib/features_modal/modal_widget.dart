@@ -1,23 +1,25 @@
-import 'package:awesome_select/awesome_select.dart';
-import 'package:flutter/material.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FeaturesModalWidget extends StatefulWidget {
+  const FeaturesModalWidget({super.key});
+
   @override
-  _FeaturesModalWidgetState createState() => _FeaturesModalWidgetState();
+  State<FeaturesModalWidget> createState() => _FeaturesModalWidgetState();
 }
 
 class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
   int? _question1;
   List<int> _question2 = [];
 
-  List<String> _options1 = [
+  final List<String> _options1 = [
     'Very Satisfied',
     'Somewhat Satisfied',
     'Neither Satisfied or Dissatisfied',
     'Somewhat Dissatisfied',
     'Very Dissatisfied',
   ];
-  List<String> _options2 = [
+  final List<String> _options2 = [
     'Reliable',
     'High Quality',
     'Usefull',
@@ -57,10 +59,7 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
           tileBuilder: (context, state) {
             return Card(
               elevation: 3,
-              margin: const EdgeInsets.symmetric(
-                vertical: 7,
-                horizontal: 15,
-              ),
+              margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),
@@ -90,8 +89,7 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
           },
         ),
         SmartSelect<int>.multiple(
-          title:
-              'Which of following words would you use to describe awesome_select?',
+          title: 'Which of following words would you use to describe awesome_select?',
           selectedValue: _question2,
           onChange: (selected) {
             setState(() => _question2 = selected.value);
@@ -111,9 +109,7 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
               crossAxisSpacing: 0,
               crossAxisCount: 2,
             ),
-            style: S2ChoiceStyle(
-              control: S2ChoiceControl.leading,
-            ),
+            style: S2ChoiceStyle(control: S2ChoiceControl.leading),
           ),
           modalConfirm: true,
           modalType: S2ModalType.bottomSheet,
@@ -132,16 +128,18 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
               child: ButtonTheme(
                 minWidth: double.infinity,
                 child: TextButton(
-                  child: Text('Submit (${state.selection?.length})'),
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all<Color>(
-                        Theme.of(context).primaryColor),
+                      Theme.of(context).primaryColor,
+                    ),
                     textStyle: WidgetStateProperty.all<TextStyle>(
-                        TextStyle(color: Colors.white)),
+                      TextStyle(color: Colors.white),
+                    ),
                   ),
                   onPressed: (state.selection?.isValid ?? true)
                       ? () => state.closeModal(confirmed: true)
                       : null,
+                  child: Text('Submit (${state.selection?.length})'),
                 ),
               ),
             );
@@ -149,10 +147,7 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
           tileBuilder: (context, state) {
             return Card(
               elevation: 3,
-              margin: const EdgeInsets.symmetric(
-                vertical: 7,
-                horizontal: 15,
-              ),
+              margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),

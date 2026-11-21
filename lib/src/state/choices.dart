@@ -46,12 +46,8 @@ class S2Choices<T> extends ChangeNotifier {
   bool _disposed = false;
 
   /// Default constructor
-  S2Choices({
-    List<S2Choice<T>>? items,
-    this.loader,
-    this.delay,
-    this.limit,
-  }) : preload = items;
+  S2Choices({List<S2Choice<T>>? items, this.loader, this.delay, this.limit})
+    : preload = items;
 
   /// Returns values of the choice items
   List<T>? get values {
@@ -107,26 +103,24 @@ class S2Choices<T> extends ChangeNotifier {
   }
 
   /// Function to load choice items
-  void load(S2ChoicesTask _task, {String? query}) async {
+  void load(S2ChoicesTask requestedTask, {String? query}) async {
     // skip the loader if the status busy
     if (isBusy) return null;
 
-    final bool isInitializing = _task == S2ChoicesTask.init;
-    final bool isAppending = _task == S2ChoicesTask.append;
+    final bool isInitializing = requestedTask == S2ChoicesTask.init;
+    final bool isAppending = requestedTask == S2ChoicesTask.append;
 
     // skip the loader if the items already filled
     if (isInitializing && isNotEmpty) return null;
 
-    task = task;
+    task = requestedTask;
     page = isAppending ? page + 1 : 1;
     notifyListeners();
 
     try {
-      final List<S2Choice<T>> choices = await find(S2ChoiceLoaderInfo<T>(
-        page: page,
-        limit: limit,
-        query: query,
-      ));
+      final List<S2Choice<T>> choices = await find(
+        S2ChoiceLoaderInfo<T>(page: page, limit: limit, query: query),
+      );
       if (isAppending) {
         items!.addAll(choices);
       } else {
@@ -154,9 +148,9 @@ class S2Choices<T> extends ChangeNotifier {
   List<S2Choice<T>> filter(List<S2Choice<T>> choices, String? query) {
     return query != null
         ? choices
-            .where((S2Choice<T> choice) => choice.contains(query))
-            .toList()
-            .cast<S2Choice<T>>()
+              .where((S2Choice<T> choice) => choice.contains(query))
+              .toList()
+              .cast<S2Choice<T>>()
         : choices;
   }
 
@@ -170,11 +164,13 @@ class S2Choices<T> extends ChangeNotifier {
     if (groupKeys.isEmpty == true) return null;
 
     final groups = groupKeys
-        .map((String groupKey) => S2Group<T>(
-              name: groupKey,
-              choices: groupChoices(groupKey),
-              headerStyle: config.headerStyle,
-            ))
+        .map(
+          (String groupKey) => S2Group<T>(
+            name: groupKey,
+            choices: groupChoices(groupKey),
+            headerStyle: config.headerStyle,
+          ),
+        )
         .toList();
 
     // sort the list when the comparator is provided

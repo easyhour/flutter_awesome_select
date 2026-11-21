@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesTileBuilder extends StatefulWidget {
+  const FeaturesTileBuilder({super.key});
+
   @override
-  _FeaturesTileBuilderState createState() => _FeaturesTileBuilderState();
+  State<FeaturesTileBuilder> createState() => _FeaturesTileBuilderState();
 }
 
 class _FeaturesTileBuilderState extends State<FeaturesTileBuilder> {
@@ -14,7 +17,7 @@ class _FeaturesTileBuilderState extends State<FeaturesTileBuilder> {
     'honda-hrv',
     'honda-jazz',
     'hyundai-i10',
-    'bmw-sgt'
+    'bmw-sgt',
   ];
   List<String> _categories = [];
   String? _sort = 'popular';
@@ -55,10 +58,7 @@ class _FeaturesTileBuilderState extends State<FeaturesTileBuilder> {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
-                  child: VerticalDivider(),
-                ),
+                const SizedBox(height: 40, child: VerticalDivider()),
                 Expanded(
                   child: SmartSelect<String?>.single(
                     title: 'Sort By',

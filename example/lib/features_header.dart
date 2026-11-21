@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FeaturesHeader extends StatelessWidget {
   final String title;
 
-  const FeaturesHeader(
-    this.title, {
-    Key? key,
-  }) : super(key: key);
+  const FeaturesHeader(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {

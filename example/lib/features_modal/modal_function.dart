@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 class ProgrammaticModal extends StatefulWidget {
+  const ProgrammaticModal({super.key});
+
   @override
-  _ProgrammaticModalState createState() => _ProgrammaticModalState();
+  State<ProgrammaticModal> createState() => _ProgrammaticModalState();
 }
 
 class _ProgrammaticModalState extends State<ProgrammaticModal> {
-  List<S2Choice<String>> _choices = [
+  final List<S2Choice<String>> _choices = [
     S2Choice<String>(value: 'app', title: 'Apple'),
     S2Choice<String>(value: 'ore', title: 'Orange'),
     S2Choice<String>(value: 'mel', title: 'Melon'),
@@ -15,7 +17,7 @@ class _ProgrammaticModalState extends State<ProgrammaticModal> {
 
   List<String> _value = [];
 
-  GlobalKey<S2MultiState<String>> _smartSelectKey =
+  final GlobalKey<S2MultiState<String>> _smartSelectKey =
       GlobalKey<S2MultiState<String>>();
 
   @override

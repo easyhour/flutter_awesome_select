@@ -1,5 +1,8 @@
-import 'package:awesome_select/awesome_select.dart';
-import 'package:flutter/material.dart';
+// Preserve the upstream covariant single/multiple-selection field API.
+// ignore_for_file: overridden_fields
+
+import 'package:brilliant_select/brilliant_select.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// State for Multiple Choice
 class S2MultiState<T> extends S2State<T> {
@@ -61,25 +64,29 @@ class S2MultiState<T> extends S2State<T> {
     if (widget.multiSelected != null) {
       selected
         ..addListener(selectedHandler)
-        ..resolve(defaultResolver: (value) async {
-          return widget.choiceItems
-              ?.where(
-                  (S2Choice<T> item) => value?.contains(item.value) ?? false)
-              .toList()
-              .cast<S2Choice<T>>();
-        });
+        ..resolve(
+          defaultResolver: (value) async {
+            return widget.choiceItems
+                ?.where(
+                  (S2Choice<T> item) => value?.contains(item.value) ?? false,
+                )
+                .toList()
+                .cast<S2Choice<T>>();
+          },
+        );
     }
   }
 
   @override
   void resolveSelection() {
     // set the initial selection
-    selection = S2MultiSelection<T>(
-      initial: selected.choice,
-      validation: modalValidation,
-    )
-      ..addListener(selectionHandler)
-      ..validate();
+    selection =
+        S2MultiSelection<T>(
+            initial: selected.choice,
+            validation: modalValidation,
+          )
+          ..addListener(selectionHandler)
+          ..validate();
   }
 
   @override
@@ -160,7 +167,7 @@ class S2MultiState<T> extends S2State<T> {
   Widget? choiceTitle(S2Choice<T> choice) {
     return choice.title != null
         ? builder?.choiceTitle?.call(modalContext, this, choice) ??
-            defaultChoiceTitle(choice)
+              defaultChoiceTitle(choice)
         : null;
   }
 
@@ -168,7 +175,7 @@ class S2MultiState<T> extends S2State<T> {
   Widget? choiceSubtitle(S2Choice<T> choice) {
     return choice.subtitle != null
         ? builder?.choiceSubtitle?.call(modalContext, this, choice) ??
-            defaultChoiceSubtitle(choice)
+              defaultChoiceSubtitle(choice)
         : null;
   }
 
@@ -184,8 +191,8 @@ class S2MultiState<T> extends S2State<T> {
       value: selection!.length == choices!.length
           ? true
           : selection!.length == 0
-              ? false
-              : null,
+          ? false
+          : null,
       tristate: true,
       onChanged: (value) {
         if (value == true) {
@@ -204,8 +211,8 @@ class S2MultiState<T> extends S2State<T> {
       value: selection!.hasAll(values!)
           ? true
           : selection!.hasAny(values)
-              ? null
-              : false,
+          ? null
+          : false,
       tristate: true,
       onChanged: (value) {
         if (value == true) {

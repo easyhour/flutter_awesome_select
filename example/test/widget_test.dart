@@ -1,12 +1,22 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:brilliant_select_example/features_option/option_list_of_string.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {});
+  testWidgets('example changes sort order through standalone Material dialog', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: FeaturesOptionListOfString())),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Low Price'), findsOneWidget);
+    await tester.tap(find.text('Sort By'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Newest'));
+    await tester.pumpAndSettle();
+    expect(find.byType(Dialog), findsNothing);
+    expect(find.text('Newest'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

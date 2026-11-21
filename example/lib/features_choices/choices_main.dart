@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+
 import './choices_grouped.dart';
 import './choices_divider.dart';
 import './choices_builder.dart';
@@ -9,6 +10,8 @@ import '../keep_alive.dart';
 
 class FeaturesChoices extends StatelessWidget {
   final scrollController = ScrollController();
+
+  FeaturesChoices({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
-import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import './modal_theme.dart';
 
 /// Target to open choices list

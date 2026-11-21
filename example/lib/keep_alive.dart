@@ -3,13 +3,10 @@ import 'package:flutter/widgets.dart';
 class KeepAliveWidget extends StatefulWidget {
   final Widget child;
 
-  KeepAliveWidget({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const KeepAliveWidget({super.key, required this.child});
 
   @override
-  _KeepAliveWidgetState createState() => _KeepAliveWidgetState();
+  State<KeepAliveWidget> createState() => _KeepAliveWidgetState();
 }
 
 class _KeepAliveWidgetState extends State<KeepAliveWidget>

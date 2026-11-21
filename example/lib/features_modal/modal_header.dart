@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../widgets/icon_badge.dart';
 import '../choices.dart' as choices;
 
 class FeaturesModalHeader extends StatefulWidget {
+  const FeaturesModalHeader({super.key});
+
   @override
-  _FeaturesModalHeaderState createState() => _FeaturesModalHeaderState();
+  State<FeaturesModalHeader> createState() => _FeaturesModalHeaderState();
 }
 
 class _FeaturesModalHeaderState extends State<FeaturesModalHeader> {
@@ -67,7 +70,7 @@ class _FeaturesModalHeaderState extends State<FeaturesModalHeader> {
               isTwoLine: true,
               leading: CircleAvatar(
                 child: Text(
-                  '${state.selected.toString()[0]}',
+                  state.selected.toString()[0],
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -100,10 +103,7 @@ class _FeaturesModalHeaderState extends State<FeaturesModalHeader> {
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  margin: EdgeInsets.only(
-                    top: 15,
-                    bottom: 10,
-                  ),
+                  margin: EdgeInsets.only(top: 15, bottom: 10),
                 ),
                 state.modalTitle,
                 SizedBox(height: 15),

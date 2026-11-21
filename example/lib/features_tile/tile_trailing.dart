@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesTileTrailing extends StatefulWidget {
+  const FeaturesTileTrailing({super.key});
+
   @override
-  _FeaturesTileTrailingState createState() => _FeaturesTileTrailingState();
+  State<FeaturesTileTrailing> createState() => _FeaturesTileTrailingState();
 }
 
 class _FeaturesTileTrailingState extends State<FeaturesTileTrailing> {

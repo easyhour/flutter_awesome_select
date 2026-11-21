@@ -1,5 +1,5 @@
-import 'package:awesome_select/awesome_select.dart';
-import 'package:flutter/material.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Default trigger/tile widget
 class S2Tile<T> extends StatelessWidget {
@@ -85,7 +85,7 @@ class S2Tile<T> extends StatelessWidget {
 
   /// Create a default trigger widget
   const S2Tile({
-    Key? key,
+    super.key,
     required this.value,
     required this.onTap,
     required this.title,
@@ -103,12 +103,12 @@ class S2Tile<T> extends StatelessWidget {
     this.hideValue = false,
     this.padding,
     this.body,
-  }) : super(key: key);
+  });
 
   /// Create a default trigger widget from state
   S2Tile.fromState(
     S2State<T> state, {
-    Key? key,
+    super.key,
     Widget? value,
     GestureTapCallback? onTap,
     Widget? title,
@@ -126,12 +126,11 @@ class S2Tile<T> extends StatelessWidget {
     this.hideValue = false,
     this.padding,
     this.body,
-  })  : title = title ?? state.titleWidget,
-        value = value ?? Text(state.selected.toString()),
-        onTap = onTap ?? state.showModal,
-        isLoading = isLoading ?? state.selected.isResolving,
-        isError = isError ?? state.selected.isNotValid,
-        super(key: key);
+  }) : title = title ?? state.titleWidget,
+       value = value ?? Text(state.selected.toString()),
+       onTap = onTap ?? state.showModal,
+       isLoading = isLoading ?? state.selected.isResolving,
+       isError = isError ?? state.selected.isNotValid;
 
   /// Returns default trailing widget
   static const Widget defaultTrailing = Icon(
@@ -143,9 +142,7 @@ class S2Tile<T> extends StatelessWidget {
   static const Widget defaultLoadingIndicator = SizedBox(
     height: 16.0,
     width: 16.0,
-    child: CircularProgressIndicator(
-      strokeWidth: 1.5,
-    ),
+    child: CircularProgressIndicator(strokeWidth: 1.5),
   );
 
   @override
@@ -170,29 +167,24 @@ class S2Tile<T> extends StatelessWidget {
   Widget get _tileWithBodyWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _tileWidget,
-        body!,
-      ],
+      children: <Widget>[_tileWidget, body!],
     );
   }
 
   Widget? get _trailingWidget {
     return isTwoLine != true && hideValue != true
-        ? Container(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  constraints: const BoxConstraints(maxWidth: 100),
-                  child: _valueWidget,
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 5),
-                  child: _trailingIconWidget,
-                ),
-              ],
-            ),
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                constraints: const BoxConstraints(maxWidth: 100),
+                child: _valueWidget,
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 5),
+                child: _trailingIconWidget,
+              ),
+            ],
           )
         : _trailingIconWidget;
   }

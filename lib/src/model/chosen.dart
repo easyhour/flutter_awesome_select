@@ -1,3 +1,6 @@
+// Preserve the upstream covariant single/multiple-selection field API.
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/widgets.dart';
 
 import 'choice_item.dart';
@@ -7,24 +10,25 @@ typedef S2SingleSelectedResolver<T> = Future<S2Choice<T>?> Function(T value);
 
 /// Function to return a `List` of [S2Choice] from a `List` of `value`
 typedef S2MultiSelectedResolver<T> = Future<List<S2Choice<T>>?> Function(
-    List<T>? value);
+  List<T>? value,
+);
 
 /// Chosen data class
 abstract mixin class S2ChosenData<T> {
   /// Returns the choice item(s)
-  get choice;
+  dynamic get choice;
 
   /// Returns the value(s) data
-  get value;
+  dynamic get value;
 
   /// Returns the title(s) data
-  get title;
+  dynamic get title;
 
   /// Returns the subtitle(s) data
-  get subtitle;
+  dynamic get subtitle;
 
   /// Returns the group(s) data
-  get group;
+  dynamic get group;
 
   /// Returns the length of the [choice]
   int get length;
@@ -133,9 +137,9 @@ mixin S2MultiChosenData<T> on S2ChosenData<T> {
   List<String>? get subtitle {
     return isNotEmpty
         ? choice
-            .map((S2Choice<T> item) => item.subtitle)
-            .toList()
-            .cast<String>()
+              .map((S2Choice<T> item) => item.subtitle)
+              .toList()
+              .cast<String>()
         : null;
   }
 
@@ -210,7 +214,7 @@ class S2MultiChosen<T> extends S2ChosenData<T> with S2MultiChosenData<T> {
 
 abstract class S2ChosenNotifier<T> extends ChangeNotifier with S2ChosenData<T> {
   /// A Function used to validate the selection(s)
-  covariant var validation;
+  covariant dynamic validation;
 
   /// Validation error message
   String error = '';
@@ -263,7 +267,7 @@ abstract class S2Selected<T> extends S2ChosenNotifier<T> {
   String? placeholder;
 
   /// Function to resolve [choice] from [value]
-  covariant var resolver;
+  covariant dynamic resolver;
 
   /// Returns `true` if [choice] is not `null`
   bool get isResolved => choice != null;
@@ -276,25 +280,24 @@ abstract class S2Selected<T> extends S2ChosenNotifier<T> {
 
   /// Resolve [choice] from [value] using user defined [resolver],
   /// or fallback to [defaultResolver] if [resolver] is not defined
-  resolve();
+  void resolve();
 
   /// Override the selected choice with a new one, and validate it
-  set choice(covariant var choice);
+  set choice(covariant dynamic choice);
 
   /// Override the selected value with a new one, and validate it
-  set value(covariant var value);
+  set value(covariant dynamic value);
 }
 
 class S2SingleSelected<T> extends S2Selected<T> with S2SingleChosenData<T> {
   /// Default constructor
   S2SingleSelected({
-    required T value,
-    S2Choice<T>? choice,
+    required this._value,
+    this._choice,
     this.resolver,
     this.validation,
     this.placeholder,
-  })  : _value = value,
-        _choice = choice;
+  });
 
   T _value;
 
@@ -319,9 +322,7 @@ class S2SingleSelected<T> extends S2Selected<T> with S2SingleChosenData<T> {
   S2SingleSelectedResolver<T>? resolver;
 
   @override
-  void resolve({
-    S2SingleSelectedResolver<T>? defaultResolver,
-  }) async {
+  void resolve({S2SingleSelectedResolver<T>? defaultResolver}) async {
     if (isResolved) return null;
 
     isResolving = true;
@@ -368,8 +369,8 @@ class S2SingleSelected<T> extends S2Selected<T> with S2SingleChosenData<T> {
     return isResolving == true
         ? 'Resolving'
         : isValid == true
-            ? title ?? placeholder ?? 'Select one'
-            : error;
+        ? title ?? placeholder ?? 'Select one'
+        : error;
   }
 }
 
@@ -381,8 +382,8 @@ class S2MultiSelected<T> extends S2Selected<T> with S2MultiChosenData<T> {
     this.resolver,
     this.validation,
     this.placeholder,
-  })  : _value = List<T>.from(value),
-        _choice = choice != null ? List<S2Choice<T>>.from(choice) : null;
+  }) : _value = List<T>.from(value),
+       _choice = choice != null ? List<S2Choice<T>>.from(choice) : null;
 
   List<T> _value;
 
@@ -407,9 +408,7 @@ class S2MultiSelected<T> extends S2Selected<T> with S2MultiChosenData<T> {
   S2MultiSelectedResolver<T>? resolver;
 
   @override
-  void resolve({
-    S2MultiSelectedResolver<T>? defaultResolver,
-  }) async {
+  void resolve({S2MultiSelectedResolver<T>? defaultResolver}) async {
     if (isResolved) return null;
 
     isResolving = true;
@@ -459,17 +458,17 @@ class S2MultiSelected<T> extends S2Selected<T> with S2MultiChosenData<T> {
     return isResolving == true
         ? 'Resolving'
         : isValid == true
-            ? title?.join(', ') ?? placeholder ?? 'Select one or more'
-            : error;
+        ? title?.join(', ') ?? placeholder ?? 'Select one or more'
+        : error;
   }
 }
 
 abstract class S2Selection<T> extends S2ChosenNotifier<T> {
   /// The initial selection
-  covariant var initial;
+  covariant dynamic initial;
 
   /// Override choice(s) in the current selection with a new value(s), and validate it
-  set choice(covariant var choice);
+  set choice(covariant dynamic choice);
 
   /// Select or unselect a choice
   void select(S2Choice<T> choice, {bool selected = true});
@@ -491,10 +490,8 @@ class S2SingleSelection<T> extends S2Selection<T> with S2SingleChosenData<T> {
   final S2Validation<S2SingleChosen<T>>? validation;
 
   /// Default constructor
-  S2SingleSelection({
-    required this.initial,
-    this.validation,
-  }) : _choice = initial;
+  S2SingleSelection({required this.initial, this.validation})
+    : _choice = initial;
 
   /// The choice of the current selection
   S2Choice<T>? _choice;
@@ -546,11 +543,9 @@ class S2MultiSelection<T> extends S2Selection<T> with S2MultiChosenData<T> {
   final S2Validation<S2MultiChosen<T>>? validation;
 
   /// Default constructor
-  S2MultiSelection({
-    required List<S2Choice<T>>? initial,
-    this.validation,
-  })  : initial = List.from(initial ?? []),
-        _choice = List.from(initial ?? []);
+  S2MultiSelection({required List<S2Choice<T>>? initial, this.validation})
+    : initial = List.from(initial ?? []),
+      _choice = List.from(initial ?? []);
 
   /// The choice(s) of the current selection
   List<S2Choice<T>> _choice;

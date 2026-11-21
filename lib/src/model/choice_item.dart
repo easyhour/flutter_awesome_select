@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:awesome_select/src/utils/accent.dart';
+import 'package:brilliant_select/src/utils/accent.dart';
+
 import 'choice_theme.dart';
 
 /// Validation callback
@@ -68,24 +69,26 @@ class S2Choice<T> with Diagnosticable {
     S2OptionProp<E, dynamic>? meta,
     S2OptionProp<E, S2ChoiceStyle>? style,
     S2OptionProp<E, S2ChoiceStyle>? activeStyle,
-  }) =>
-      source
-          .asMap()
-          .map((index, item) => MapEntry(
-              index,
-              S2Choice<R>(
-                value: value.call(index, item),
-                title: title.call(index, item),
-                subtitle: subtitle?.call(index, item),
-                group: group?.call(index, item),
-                disabled: disabled?.call(index, item) ?? false,
-                hidden: hidden?.call(index, item) ?? false,
-                meta: meta?.call(index, item),
-                style: style?.call(index, item),
-                activeStyle: activeStyle?.call(index, item),
-              )))
-          .values
-          .toList();
+  }) => source
+      .asMap()
+      .map(
+        (index, item) => MapEntry(
+          index,
+          S2Choice<R>(
+            value: value.call(index, item),
+            title: title.call(index, item),
+            subtitle: subtitle?.call(index, item),
+            group: group?.call(index, item),
+            disabled: disabled?.call(index, item) ?? false,
+            hidden: hidden?.call(index, item) ?? false,
+            meta: meta?.call(index, item),
+            style: style?.call(index, item),
+            activeStyle: activeStyle?.call(index, item),
+          ),
+        ),
+      )
+      .values
+      .toList();
 
   bool contains(String query) {
     return _testPropBy(title, query) ||

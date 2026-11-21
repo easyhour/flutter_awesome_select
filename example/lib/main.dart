@@ -1,11 +1,13 @@
-import 'package:awesomeselect/theme/theme.dart';
-import 'package:flutter/material.dart';
+import 'package:brilliant_select_example/theme/theme.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'features.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.dark(secondary: Colors.red),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         checkboxTheme: CheckboxThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          fillColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -36,8 +39,9 @@ class MyApp extends StatelessWidget {
           }),
         ),
         radioTheme: RadioThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          fillColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -48,8 +52,9 @@ class MyApp extends StatelessWidget {
           }),
         ),
         switchTheme: SwitchThemeData(
-          thumbColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          thumbColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -58,8 +63,9 @@ class MyApp extends StatelessWidget {
             }
             return null;
           }),
-          trackColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          trackColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }

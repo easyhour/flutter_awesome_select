@@ -23,12 +23,12 @@ class S2ChoicesList<T> extends StatelessWidget {
 
   /// Default constructor
   S2ChoicesList({
-    Key? key,
+    super.key,
     required this.itemLength,
     required this.itemBuilder,
     required this.dividerBuilder,
     required this.config,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class S2ChoicesList<T> extends StatelessWidget {
         child: config.isWrapLayout
             ? _listWrap(context)
             : config.isGridLayout
-                ? _listGrid()
-                : config.useDivider
-                    ? _listSeparated()
-                    : _listDefault(),
+            ? _listGrid()
+            : config.useDivider
+            ? _listSeparated()
+            : _listDefault(),
       ),
     );
 
@@ -56,11 +56,9 @@ class S2ChoicesList<T> extends StatelessWidget {
       physics: config.physics,
       controller: scrollController,
       scrollDirection: config.direction,
-      padding: config.padding ??
-          const EdgeInsets.symmetric(
-            vertical: 10.0,
-            horizontal: 15.0,
-          ),
+      padding:
+          config.padding ??
+          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
       child: Align(
         alignment: AlignmentDirectional.topStart,
         child: Wrap(
@@ -109,7 +107,8 @@ class S2ChoicesList<T> extends StatelessWidget {
       padding: config.padding ?? const EdgeInsets.all(10.0),
       itemCount: itemLength,
       itemBuilder: itemBuilder,
-      gridDelegate: config.gridDelegate ??
+      gridDelegate:
+          config.gridDelegate ??
           SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: config.gridCount,
             crossAxisSpacing: config.gridSpacing,

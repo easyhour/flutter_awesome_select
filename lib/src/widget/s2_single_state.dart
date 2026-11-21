@@ -1,6 +1,9 @@
-import 'package:awesome_select/awesome_select.dart';
+// Preserve the upstream covariant single/multiple-selection field API.
+// ignore_for_file: overridden_fields
+
+import 'package:brilliant_select/brilliant_select.dart';
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// State for Single Choice
 class S2SingleState<T> extends S2State<T> {
@@ -61,22 +64,25 @@ class S2SingleState<T> extends S2State<T> {
   void resolveSelected() async {
     selected
       ..addListener(super.selectedHandler)
-      ..resolve(defaultResolver: (value) async {
-        return widget.choiceItems?.firstWhereOrNull(
-          (item) => item.value == value,
-        );
-      });
+      ..resolve(
+        defaultResolver: (value) async {
+          return widget.choiceItems?.firstWhereOrNull(
+            (item) => item.value == value,
+          );
+        },
+      );
   }
 
   @override
   void resolveSelection() async {
     // set the initial selection
-    selection = S2SingleSelection<T?>(
-      initial: selected.choice,
-      validation: modalValidation,
-    )
-      ..addListener(selectionHandler)
-      ..validate();
+    selection =
+        S2SingleSelection<T?>(
+            initial: selected.choice,
+            validation: modalValidation,
+          )
+          ..addListener(selectionHandler)
+          ..validate();
   }
 
   @override
@@ -157,7 +163,7 @@ class S2SingleState<T> extends S2State<T> {
   Widget? choiceTitle(S2Choice<T> choice) {
     return choice.title != null
         ? builder?.choiceTitle?.call(modalContext, this, choice) ??
-            defaultChoiceTitle(choice)
+              defaultChoiceTitle(choice)
         : null;
   }
 
@@ -165,7 +171,7 @@ class S2SingleState<T> extends S2State<T> {
   Widget? choiceSubtitle(S2Choice<T> choice) {
     return choice.subtitle != null
         ? builder?.choiceSubtitle?.call(modalContext, this, choice) ??
-            defaultChoiceSubtitle(choice)
+              defaultChoiceSubtitle(choice)
         : null;
   }
 

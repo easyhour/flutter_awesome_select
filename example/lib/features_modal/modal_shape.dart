@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesModalShape extends StatefulWidget {
+  const FeaturesModalShape({super.key});
+
   @override
-  _FeaturesModalShapeState createState() => _FeaturesModalShapeState();
+  State<FeaturesModalShape> createState() => _FeaturesModalShapeState();
 }
 
 class _FeaturesModalShapeState extends State<FeaturesModalShape> {
@@ -40,7 +43,7 @@ class _FeaturesModalShapeState extends State<FeaturesModalShape> {
               isTwoLine: true,
               leading: CircleAvatar(
                 child: Text(
-                  '${state.selected.toString()[0]}',
+                  state.selected.toString()[0],
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -65,9 +68,7 @@ class _FeaturesModalShapeState extends State<FeaturesModalShape> {
                 ),
               ),
             ),
-            headerStyle: S2ModalHeaderStyle(
-              centerTitle: true,
-            ),
+            headerStyle: S2ModalHeaderStyle(centerTitle: true),
           ),
           tileBuilder: (context, state) {
             return S2Tile.fromState(

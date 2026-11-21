@@ -1,5 +1,8 @@
-import 'package:awesome_select/awesome_select.dart';
-import 'package:flutter/material.dart';
+// The public single/multiple constructors intentionally share a state factory.
+// ignore_for_file: no_logic_in_create_state
+
+import 'package:brilliant_select/brilliant_select.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// SmartSelect allows you to easily convert your usual form select or dropdown
 /// into dynamic page, popup dialog, or sliding bottom sheet with various choices input
@@ -93,7 +96,7 @@ class SmartSelect<T> extends StatefulWidget {
 
   /// Default constructor
   SmartSelect({
-    Key? key,
+    super.key,
     this.title,
     this.placeholder,
     required this.isMultiChoice,
@@ -122,31 +125,30 @@ class SmartSelect<T> extends StatefulWidget {
     this.groupConfig = const S2GroupConfig(),
     this.choiceItems,
     this.choiceLoader,
-  })  : assert(
-          title != null || modalConfig.title != null,
-          'title and modalConfig.title must not be both null',
-        ),
-        assert(
-          (isMultiChoice && multiOnChange != null && multiBuilder != null) ||
-              (!isMultiChoice &&
-                  singleOnChange != null &&
-                  singleBuilder != null),
-          isMultiChoice
-              ? 'multiValue, multiOnChange, and multiBuilder must be not null in multiple choice'
-              : 'singleValue, singleOnChange, and singleBuilder must be not null in single choice',
-        ),
-        assert(
-          (isMultiChoice && choiceConfig.type != S2ChoiceType.radios) ||
-              (!isMultiChoice && choiceConfig.type != S2ChoiceType.checkboxes),
-          isMultiChoice
-              ? 'multiple choice can\'t use S2ChoiceType.radios'
-              : 'Single choice can\'t use S2ChoiceType.checkboxes',
-        ),
-        assert(
-          choiceItems != null || choiceLoader != null,
-          '`choiceItems` and `choiceLoader` can\'t be both null',
-        ),
-        super(key: key);
+  }) : assert(
+         title != null || modalConfig.title != null,
+         'title and modalConfig.title must not be both null',
+       ),
+       assert(
+         (isMultiChoice && multiOnChange != null && multiBuilder != null) ||
+             (!isMultiChoice &&
+                 singleOnChange != null &&
+                 singleBuilder != null),
+         isMultiChoice
+             ? 'multiValue, multiOnChange, and multiBuilder must be not null in multiple choice'
+             : 'singleValue, singleOnChange, and singleBuilder must be not null in single choice',
+       ),
+       assert(
+         (isMultiChoice && choiceConfig.type != S2ChoiceType.radios) ||
+             (!isMultiChoice && choiceConfig.type != S2ChoiceType.checkboxes),
+         isMultiChoice
+             ? 'multiple choice can\'t use S2ChoiceType.radios'
+             : 'Single choice can\'t use S2ChoiceType.checkboxes',
+       ),
+       assert(
+         choiceItems != null || choiceLoader != null,
+         '`choiceItems` and `choiceLoader` can\'t be both null',
+       );
 
   /// Constructor for single choice
   ///
@@ -355,9 +357,9 @@ class SmartSelect<T> extends StatefulWidget {
     S2ComplexWidgetBuilder<S2SingleState<T>, S2Choice<T>>? choiceBuilder,
     S2ComplexWidgetBuilder<S2SingleState<T>, S2Choice<T>>? choiceTitleBuilder,
     S2ComplexWidgetBuilder<S2SingleState<T>, S2Choice<T>>?
-        choiceSubtitleBuilder,
+    choiceSubtitleBuilder,
     S2ComplexWidgetBuilder<S2SingleState<T>, S2Choice<T>>?
-        choiceSecondaryBuilder,
+    choiceSecondaryBuilder,
     IndexedWidgetBuilder? choiceDividerBuilder,
     S2WidgetBuilder<S2SingleState<T>>? choiceEmptyBuilder,
     S2ComplexWidgetBuilder<S2SingleState<T>, S2Group<T>>? groupBuilder,
@@ -419,7 +421,9 @@ class SmartSelect<T> extends StatefulWidget {
       singleOnModalWillClose: onModalWillClose,
       singleValidation: validation,
       singleModalValidation: modalValidation,
-      singleBuilder: S2SingleBuilder<T>().merge(builder).copyWith(
+      singleBuilder: S2SingleBuilder<T>()
+          .merge(builder)
+          .copyWith(
             tile: tileBuilder,
             modal: modalBuilder,
             modalHeader: modalHeaderBuilder,
@@ -438,7 +442,9 @@ class SmartSelect<T> extends StatefulWidget {
             group: groupBuilder,
             groupHeader: groupHeaderBuilder,
           ),
-      choiceConfig: defaultChoiceConfig.merge(choiceConfig).copyWith(
+      choiceConfig: defaultChoiceConfig
+          .merge(choiceConfig)
+          .copyWith(
             type: choiceType,
             layout: choiceLayout,
             direction: choiceDirection,
@@ -451,14 +457,18 @@ class SmartSelect<T> extends StatefulWidget {
             pageLimit: choicePageLimit,
             delay: choiceDelay,
           ),
-      groupConfig: defaultGroupConfig.merge(groupConfig).copyWith(
+      groupConfig: defaultGroupConfig
+          .merge(groupConfig)
+          .copyWith(
             enabled: groupEnabled ?? choiceGrouped,
             useSelector: groupSelector,
             useCounter: groupCounter,
             sortBy: groupSortBy,
             headerStyle: groupHeaderStyle,
           ),
-      modalConfig: defaultModalConfig.merge(modalConfig).copyWith(
+      modalConfig: defaultModalConfig
+          .merge(modalConfig)
+          .copyWith(
             type: modalType,
             title: modalTitle,
             filterHint: modalFilterHint,
@@ -680,7 +690,7 @@ class SmartSelect<T> extends StatefulWidget {
     S2ComplexWidgetBuilder<S2MultiState<T>, S2Choice<T>>? choiceTitleBuilder,
     S2ComplexWidgetBuilder<S2MultiState<T>, S2Choice<T>>? choiceSubtitleBuilder,
     S2ComplexWidgetBuilder<S2MultiState<T>, S2Choice<T>>?
-        choiceSecondaryBuilder,
+    choiceSecondaryBuilder,
     IndexedWidgetBuilder? choiceDividerBuilder,
     S2WidgetBuilder<S2MultiState<T>>? choiceEmptyBuilder,
     S2ComplexWidgetBuilder<S2MultiState<T>, S2Group<T>>? groupBuilder,
@@ -742,7 +752,9 @@ class SmartSelect<T> extends StatefulWidget {
       multiOnModalWillClose: onModalWillClose,
       multiValidation: validation,
       multiModalValidation: modalValidation,
-      multiBuilder: S2MultiBuilder<T>().merge(builder).copyWith(
+      multiBuilder: S2MultiBuilder<T>()
+          .merge(builder)
+          .copyWith(
             tile: tileBuilder,
             modal: modalBuilder,
             modalHeader: modalHeaderBuilder,
@@ -761,7 +773,9 @@ class SmartSelect<T> extends StatefulWidget {
             group: groupBuilder,
             groupHeader: groupHeaderBuilder,
           ),
-      choiceConfig: defaultChoiceConfig.merge(choiceConfig).copyWith(
+      choiceConfig: defaultChoiceConfig
+          .merge(choiceConfig)
+          .copyWith(
             type: choiceType,
             layout: choiceLayout,
             direction: choiceDirection,
@@ -774,14 +788,18 @@ class SmartSelect<T> extends StatefulWidget {
             pageLimit: choicePageLimit,
             delay: choiceDelay,
           ),
-      groupConfig: defaultGroupConfig.merge(groupConfig).copyWith(
+      groupConfig: defaultGroupConfig
+          .merge(groupConfig)
+          .copyWith(
             enabled: groupEnabled ?? choiceGrouped,
             useSelector: groupSelector,
             useCounter: groupCounter,
             sortBy: groupSortBy,
             headerStyle: groupHeaderStyle,
           ),
-      modalConfig: defaultModalConfig.merge(modalConfig).copyWith(
+      modalConfig: defaultModalConfig
+          .merge(modalConfig)
+          .copyWith(
             type: modalType,
             title: modalTitle,
             filterHint: modalFilterHint,

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'model/group_style.dart';
 
 /// Choice group header widget
@@ -14,11 +15,11 @@ class S2GroupHeader extends StatelessWidget {
 
   /// Default constructor
   const S2GroupHeader({
-    Key? key,
+    super.key,
     required this.title,
     this.trailing,
     this.style,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,7 @@ class S2GroupHeader extends StatelessWidget {
             style!.crossAxisAlignment ?? CrossAxisAlignment.center,
         mainAxisAlignment:
             style!.mainAxisAlignment ?? MainAxisAlignment.spaceBetween,
-        children: [
-          title,
-          trailing,
-        ].whereType<Widget>().toList(),
+        children: [title, trailing].whereType<Widget>().toList(),
       ),
     );
   }

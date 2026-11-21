@@ -1,18 +1,25 @@
-name: awesome_select
-description: Easily convert your usual single/multiple select or dropdown into page, dialog, or bottom sheet with various choice input such as radio, checkbox, switch, chips, or custom widget.
-homepage: https://github.com/akbarpulatov/flutter_smart_select
-version: 6.0.0-eh
+name: brilliant_select
+description: Customizable single and multiple selection widgets with search, grouping, dialogs and bottom sheets for Flutter.
+version: 7.0.0
+repository: https://github.com/easyhour/flutter_awesome_select
+homepage: https://github.com/easyhour/flutter_awesome_select
+issue_tracker: https://github.com/easyhour/flutter_awesome_select/issues
+topics:
+  - widgets
+  - selection
+  - forms
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
-  flutter: ">=3.0.0"
+  sdk: '>=3.14.0 <4.0.0'
+  flutter: '>=3.50.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  material_ui: ^1.11.1
   collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0

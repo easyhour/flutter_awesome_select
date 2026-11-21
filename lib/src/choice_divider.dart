@@ -1,6 +1,6 @@
-export 'package:flutter/material.dart' show Divider;
+export 'package:material_ui/material_ui.dart' show Divider;
 
-// import 'package:flutter/material.dart';
+// import 'package:material_ui/material_ui.dart';
 
 // /// Default divider widget
 // class S2Divider extends StatelessWidget {

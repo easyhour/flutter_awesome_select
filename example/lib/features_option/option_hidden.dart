@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 
 class FeaturesOptionHidden extends StatefulWidget {
+  const FeaturesOptionHidden({super.key});
+
   @override
-  _FeaturesOptionHiddenState createState() => _FeaturesOptionHiddenState();
+  State<FeaturesOptionHidden> createState() => _FeaturesOptionHiddenState();
 }
 
 class _FeaturesOptionHiddenState extends State<FeaturesOptionHidden> {
@@ -11,16 +13,16 @@ class _FeaturesOptionHiddenState extends State<FeaturesOptionHidden> {
 
   int? _sort = 0;
 
-  List<String> _categoriesOption = [
+  final List<String> _categoriesOption = [
     'Electronics',
     'Accessories',
     'Smartwatch',
     'Smartphone',
     'Audio & Video',
-    'Scientific'
+    'Scientific',
   ];
 
-  List<String> _sortOption = [
+  final List<String> _sortOption = [
     'Popular',
     'Most Reviews',
     'Newest',
@@ -66,10 +68,7 @@ class _FeaturesOptionHiddenState extends State<FeaturesOptionHidden> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 40,
-                child: VerticalDivider(),
-              ),
+              const SizedBox(height: 40, child: VerticalDivider()),
               Expanded(
                 child: SmartSelect<int?>.single(
                   title: 'Sort By',

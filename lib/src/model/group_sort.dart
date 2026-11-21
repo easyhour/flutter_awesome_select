@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'group_data.dart';
 
 /// Comparator function to use in [List.sort]
@@ -15,21 +16,21 @@ class S2GroupSort with Diagnosticable {
 
   /// Function to sort the group keys alphabetically by name in ascending order
   factory S2GroupSort.byNameInAsc() => S2GroupSort((S2Group a, S2Group b) {
-        return a.name!.toLowerCase().compareTo(b.name!.toLowerCase());
-      });
+    return a.name!.toLowerCase().compareTo(b.name!.toLowerCase());
+  });
 
   /// Function to sort the group keys alphabetically by name in descending order
   factory S2GroupSort.byNameInDesc() => S2GroupSort((S2Group a, S2Group b) {
-        return b.name!.toLowerCase().compareTo(a.name!.toLowerCase());
-      });
+    return b.name!.toLowerCase().compareTo(a.name!.toLowerCase());
+  });
 
   /// Function to sort the group keys by items count in ascending order
   factory S2GroupSort.byCountInAsc() => S2GroupSort((S2Group a, S2Group b) {
-        return a.count.compareTo(b.count);
-      });
+    return a.count.compareTo(b.count);
+  });
 
   /// Function to sort the group keys by items count in descending order
   factory S2GroupSort.byCountInDesc() => S2GroupSort((S2Group a, S2Group b) {
-        return b.count.compareTo(a.count);
-      });
+    return b.count.compareTo(a.count);
+  });
 }

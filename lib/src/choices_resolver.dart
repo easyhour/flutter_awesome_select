@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+
 import 'model/builder.dart';
 import 'model/choice_config.dart';
 import 'model/choice_theme.dart';
@@ -36,46 +37,44 @@ class S2ChoiceResolver<T> {
     return type == S2ChoiceType.checkboxes
         ? checkboxBuilder
         : type == S2ChoiceType.switches
-            ? switchBuilder
-            : type == S2ChoiceType.chips
-                ? chipBuilder
-                : type == S2ChoiceType.radios
-                    ? radioBuilder
-                    : type == S2ChoiceType.cards
-                        ? cardBuilder
-                        : null;
+        ? switchBuilder
+        : type == S2ChoiceType.chips
+        ? chipBuilder
+        : type == S2ChoiceType.radios
+        ? radioBuilder
+        : type == S2ChoiceType.cards
+        ? cardBuilder
+        : null;
   }
 
   /// Returns the radio choice widget
-  Widget radioBuilder(
-    BuildContext context,
-    S2Choice<T> choice,
-  ) =>
-      RadioListTile<T>(
-        key: ValueKey<T>(choice.value),
-        title: titleBuilder(choice),
-        subtitle: subtitleBuilder(choice),
-        secondary: secondaryBuilder(choice),
-        activeColor: choice.activeStyle!.color,
-        controlAffinity: ListTileControlAffinity
-            .values[choice.effectiveStyle!.control?.index ?? 2],
-        onChanged:
-            choice.disabled != true ? (val) => choice.select!(true) : null,
+  Widget radioBuilder(BuildContext context, S2Choice<T> choice) =>
+      RadioGroup<T>(
         groupValue: choice.selected == true ? choice.value : null,
-        value: choice.value,
+        onChanged: (_) {
+          if (choice.disabled != true) choice.select!(true);
+        },
+        child: RadioListTile<T>(
+          key: ValueKey<T>(choice.value),
+          title: titleBuilder(choice),
+          subtitle: subtitleBuilder(choice),
+          secondary: secondaryBuilder(choice),
+          activeColor: choice.activeStyle!.color,
+          controlAffinity: ListTileControlAffinity
+              .values[choice.effectiveStyle!.control?.index ?? 2],
+          enabled: choice.disabled != true,
+          value: choice.value,
+        ),
       );
 
   /// Returns the switch choice widget
-  Widget switchBuilder(
-    BuildContext context,
-    S2Choice<T> choice,
-  ) =>
+  Widget switchBuilder(BuildContext context, S2Choice<T> choice) =>
       SwitchListTile(
         key: ValueKey<T>(choice.value),
         title: titleBuilder(choice),
         subtitle: subtitleBuilder(choice),
         secondary: secondaryBuilder(choice),
-        activeColor:
+        activeThumbColor:
             choice.activeStyle!.accentColor ?? choice.activeStyle!.color,
         activeTrackColor: choice.activeStyle!.color?.withAlpha(0x80),
         inactiveThumbColor: choice.style!.accentColor,
@@ -90,10 +89,7 @@ class S2ChoiceResolver<T> {
       );
 
   /// Returns the checkbox choice widget
-  Widget checkboxBuilder(
-    BuildContext context,
-    S2Choice<T> choice,
-  ) =>
+  Widget checkboxBuilder(BuildContext context, S2Choice<T> choice) =>
       CheckboxListTile(
         key: ValueKey<T>(choice.value),
         title: titleBuilder(choice),
@@ -110,10 +106,7 @@ class S2ChoiceResolver<T> {
       );
 
   /// Returns the chip choice widget
-  Widget chipBuilder(
-    BuildContext context,
-    S2Choice<T> choice,
-  ) {
+  Widget chipBuilder(BuildContext context, S2Choice<T> choice) {
     final S2ChoiceStyle effectiveStyle = choice.effectiveStyle!;
 
     return S2ChipTheme(
@@ -143,17 +136,15 @@ class S2ChoiceResolver<T> {
   }
 
   /// Returns the card choice widget
-  Widget cardBuilder(
-    BuildContext context,
-    S2Choice<T> choice,
-  ) {
+  Widget cardBuilder(BuildContext context, S2Choice<T> choice) {
     final Color backgroundColor = choice.selected
         ? choice.activeStyle!.color ?? Theme.of(context).primaryColor
         : choice.style!.color ?? Theme.of(context).cardColor;
     final Brightness backgroundBrightness =
         ThemeData.estimateBrightnessForColor(backgroundColor);
-    final Color defaultTextColor =
-        backgroundBrightness == Brightness.dark ? Colors.white : Colors.black;
+    final Color defaultTextColor = backgroundBrightness == Brightness.dark
+        ? Colors.white
+        : Colors.black;
 
     return Card(
       elevation: choice.effectiveStyle!.elevation,

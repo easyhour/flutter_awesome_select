@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import './choice_item.dart';
 import './group_style.dart';
 
@@ -15,11 +16,7 @@ class S2Group<T> with Diagnosticable {
   final S2GroupHeaderStyle? headerStyle;
 
   /// default constructor
-  S2Group({
-    this.name,
-    this.choices,
-    this.headerStyle,
-  });
+  S2Group({this.name, this.choices, this.headerStyle});
 
   /// Group choice items length
   int get count => choices?.length ?? 0;

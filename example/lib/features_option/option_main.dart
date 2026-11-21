@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+
 import './option_disabled.dart';
 import './option_hidden.dart';
 import './option_list_of_string.dart';
@@ -11,6 +12,8 @@ import '../keep_alive.dart';
 
 class FeaturesOption extends StatelessWidget {
   final scrollController = ScrollController();
+
+  FeaturesOption({super.key});
 
   @override
   Widget build(BuildContext context) {

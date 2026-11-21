@@ -1,17 +1,13 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The theme patrol data
 ///
 /// Contains light and dark theme data, and the theme mode
 class ThemePatrolData {
   /// Default constructor
-  const ThemePatrolData({
-    this.light,
-    this.dark,
-    this.mode = ThemeMode.system,
-  });
+  const ThemePatrolData({this.light, this.dark, this.mode = ThemeMode.system});
 
   /// The default light theme data
   final ThemeData? light;
@@ -54,16 +50,14 @@ class ThemePatrolData {
 
 /// The widget builder to
 typedef ThemePatrolBuilder = Widget Function(
-    BuildContext context, ThemePatrolData? theme);
+  BuildContext context,
+  ThemePatrolData? theme,
+);
 
 /// A Widget that help you to keep an eyes on your app theme changes
 class ThemePatrol extends StatefulWidget {
   /// Internal constructor
-  ThemePatrol._({
-    Key? key,
-    required this.builder,
-    required this.theme,
-  }) : super(key: key);
+  const ThemePatrol._({required this.builder, required this.theme});
 
   /// Default constructor
   factory ThemePatrol({
@@ -75,12 +69,11 @@ class ThemePatrol extends StatefulWidget {
     ThemeMode? mode,
   }) {
     return ThemePatrol._(
-        builder: builder,
-        theme: ThemePatrolData().merge(theme).copyWith(
-              light: light,
-              dark: dark,
-              mode: mode,
-            ));
+      builder: builder,
+      theme: ThemePatrolData()
+          .merge(theme)
+          .copyWith(light: light, dark: dark, mode: mode),
+    );
   }
 
   /// Builder that gets called when the brightness or theme changes
@@ -98,7 +91,7 @@ class ThemePatrol extends StatefulWidget {
 
   /// Generate [MaterialColor] from a [Color]
   static MaterialColor createColorSwatch(Color color) {
-    return MaterialColor(color.value, {
+    return MaterialColor(color.toARGB32(), {
       50: _tintColor(color, 0.5),
       100: _tintColor(color, 0.4),
       200: _tintColor(color, 0.3),
@@ -117,8 +110,12 @@ class ThemePatrol extends StatefulWidget {
   }
 
   static Color _tintColor(Color color, double factor) {
-    return Color.fromRGBO(_tintValue(color.red, factor),
-        _tintValue(color.green, factor), _tintValue(color.blue, factor), 1);
+    return Color.fromRGBO(
+      _tintValue((color.r * 255).round().clamp(0, 255), factor),
+      _tintValue((color.g * 255).round().clamp(0, 255), factor),
+      _tintValue((color.b * 255).round().clamp(0, 255), factor),
+      1,
+    );
   }
 }
 
@@ -152,11 +149,8 @@ class ThemePatrolState extends State<ThemePatrol> {
     ThemeMode? mode,
   }) {
     setState(() {
-      theme = theme?.merge(data).copyWith(
-                light: light,
-                dark: dark,
-                mode: mode,
-              ) ??
+      theme =
+          theme?.merge(data).copyWith(light: light, dark: dark, mode: mode) ??
           data;
     });
   }
@@ -177,8 +171,9 @@ class ThemePatrolState extends State<ThemePatrol> {
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         checkboxTheme: CheckboxThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          fillColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -189,8 +184,9 @@ class ThemePatrolState extends State<ThemePatrol> {
           }),
         ),
         radioTheme: RadioThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          fillColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -201,8 +197,9 @@ class ThemePatrolState extends State<ThemePatrol> {
           }),
         ),
         switchTheme: SwitchThemeData(
-          thumbColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          thumbColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -211,8 +208,9 @@ class ThemePatrolState extends State<ThemePatrol> {
             }
             return null;
           }),
-          trackColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          trackColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }

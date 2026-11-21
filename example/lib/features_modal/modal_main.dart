@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+
 import './modal_filter.dart';
 import './modal_confirm.dart';
 import './modal_validation.dart';
@@ -13,6 +14,8 @@ import '../keep_alive.dart';
 
 class FeaturesModal extends StatelessWidget {
   final scrollController = ScrollController();
+
+  FeaturesModal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +63,17 @@ class FeaturesModal extends StatelessWidget {
           ),
           KeepAliveWidget(
             child: StickyHeader(
-              header:
-                  const FeaturesHeader('Custom Modal Header & Footer Widget'),
+              header: const FeaturesHeader(
+                'Custom Modal Header & Footer Widget',
+              ),
               content: FeaturesModalWidget(),
             ),
           ),
           KeepAliveWidget(
             child: StickyHeader(
-              header:
-                  const FeaturesHeader('Only Choices, Without Header & Footer'),
+              header: const FeaturesHeader(
+                'Only Choices, Without Header & Footer',
+              ),
               content: FeaturesModalChoices(),
             ),
           ),

@@ -1,1 +1,1 @@
-export 'package:flutter/material.dart' show CircularProgressIndicator;
+export 'package:material_ui/material_ui.dart' show CircularProgressIndicator;

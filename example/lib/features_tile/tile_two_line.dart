@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesTileTwoLine extends StatefulWidget {
+  const FeaturesTileTwoLine({super.key});
+
   @override
-  _FeaturesTileTwoLineState createState() => _FeaturesTileTwoLineState();
+  State<FeaturesTileTwoLine> createState() => _FeaturesTileTwoLineState();
 }
 
 class _FeaturesTileTwoLineState extends State<FeaturesTileTwoLine> {
@@ -22,10 +25,7 @@ class _FeaturesTileTwoLineState extends State<FeaturesTileTwoLine> {
           choiceItems: choices.days,
           onChange: (selected) => setState(() => _day = selected.value),
           tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isTwoLine: true,
-            );
+            return S2Tile.fromState(state, isTwoLine: true);
           },
         ),
         const Divider(indent: 20),
@@ -35,10 +35,7 @@ class _FeaturesTileTwoLineState extends State<FeaturesTileTwoLine> {
           choiceItems: choices.months,
           onChange: (selected) => setState(() => _month = selected.value),
           tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isTwoLine: true,
-            );
+            return S2Tile.fromState(state, isTwoLine: true);
           },
         ),
         const SizedBox(height: 7),

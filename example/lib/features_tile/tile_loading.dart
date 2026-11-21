@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesTileLoading extends StatefulWidget {
+  const FeaturesTileLoading({super.key});
+
   @override
-  _FeaturesTileLoadingState createState() => _FeaturesTileLoadingState();
+  State<FeaturesTileLoading> createState() => _FeaturesTileLoadingState();
 }
 
 class _FeaturesTileLoadingState extends State<FeaturesTileLoading> {
@@ -22,10 +25,7 @@ class _FeaturesTileLoadingState extends State<FeaturesTileLoading> {
           choiceItems: choices.days,
           onChange: (selected) => setState(() => _day = selected.value),
           tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isLoading: true,
-            );
+            return S2Tile.fromState(state, isLoading: true);
           },
         ),
         const Divider(indent: 20),
@@ -35,11 +35,7 @@ class _FeaturesTileLoadingState extends State<FeaturesTileLoading> {
           choiceItems: choices.months,
           onChange: (selected) => setState(() => _month = selected.value),
           tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isLoading: true,
-              isTwoLine: true,
-            );
+            return S2Tile.fromState(state, isLoading: true, isTwoLine: true);
           },
         ),
         const SizedBox(height: 7),

@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesModalFilter extends StatefulWidget {
+  const FeaturesModalFilter({super.key});
+
   @override
-  _FeaturesModalFilterState createState() => _FeaturesModalFilterState();
+  State<FeaturesModalFilter> createState() => _FeaturesModalFilterState();
 }
 
 class _FeaturesModalFilterState extends State<FeaturesModalFilter> {

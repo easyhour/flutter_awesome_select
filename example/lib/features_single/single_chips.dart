@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../choices.dart' as choices;
 
 class FeaturesSingleChips extends StatefulWidget {
+  const FeaturesSingleChips({super.key});
+
   @override
-  _FeaturesSingleChipsState createState() => _FeaturesSingleChipsState();
+  State<FeaturesSingleChips> createState() => _FeaturesSingleChipsState();
 }
 
 class _FeaturesSingleChipsState extends State<FeaturesSingleChips> {
@@ -72,10 +75,7 @@ class _FeaturesSingleChipsState extends State<FeaturesSingleChips> {
           onChange: (selected) => setState(() => _day = selected.value),
           modalType: S2ModalType.popupDialog,
           choiceType: S2ChoiceType.chips,
-          choiceStyle: S2ChoiceStyle(
-            color: Colors.blueGrey,
-            raised: true,
-          ),
+          choiceStyle: S2ChoiceStyle(color: Colors.blueGrey, raised: true),
           choiceActiveStyle: S2ChoiceStyle(
             color: Theme.of(context).primaryColor,
             raised: true,

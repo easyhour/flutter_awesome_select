@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Controller for [S2TextError]
 class S2TextErrorController extends ChangeNotifier {
   /// Default constructor
-  S2TextErrorController({
-    bool? visibled,
-  }) : _visibled = visibled ?? false;
+  S2TextErrorController({bool? visibled}) : _visibled = visibled ?? false;
 
   bool? _visibled;
 
@@ -52,12 +50,7 @@ class S2TextError extends StatefulWidget {
   final S2TextErrorController? controller;
 
   /// Default constructor
-  const S2TextError({
-    Key? key,
-    this.child,
-    this.visibled,
-    this.controller,
-  }) : super(key: key);
+  const S2TextError({super.key, this.child, this.visibled, this.controller});
 
   @override
   S2TextErrorState createState() => S2TextErrorState();
@@ -73,7 +66,7 @@ class S2TextErrorState extends State<S2TextError> {
   }
 
   /// Set the [controller] by provider value
-  void initController(newController) {
+  void initController(S2TextErrorController? newController) {
     controller?.dispose();
     controller = (newController ?? defaultController)
       ..addListener(() => setState(() {}));

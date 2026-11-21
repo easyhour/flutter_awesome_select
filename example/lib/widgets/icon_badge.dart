@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class IconBadge extends StatelessWidget {
   final Icon icon;
   final int counter;
   final Color color;
 
-  IconBadge({
-    Key? key,
+  const IconBadge({
+    super.key,
     required this.icon,
     this.counter = 0,
     this.color = Colors.red,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 30.0,
       height: 30.0,
       child: Stack(
@@ -29,10 +29,7 @@ class IconBadge extends StatelessWidget {
                 color: color,
                 borderRadius: BorderRadius.circular(10),
               ),
-              constraints: BoxConstraints(
-                minWidth: 14,
-                minHeight: 14,
-              ),
+              constraints: BoxConstraints(minWidth: 14, minHeight: 14),
               child: Text(
                 counter.toString(),
                 style: TextStyle(
@@ -43,7 +40,7 @@ class IconBadge extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

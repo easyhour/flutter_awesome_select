@@ -1,11 +1,13 @@
 import 'package:async/async.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:brilliant_select/brilliant_select.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FeaturesOptionAsync extends StatefulWidget {
+  const FeaturesOptionAsync({super.key});
+
   @override
-  _FeaturesOptionAsyncState createState() => _FeaturesOptionAsyncState();
+  State<FeaturesOptionAsync> createState() => _FeaturesOptionAsyncState();
 }
 
 class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
@@ -17,7 +19,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
   final _countriesMemoizer = AsyncMemoizer<List<S2Choice<String>>>();
 
   List<String> _invitations = [];
-  List<String> _breeds = [];
+  final List<String> _breeds = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +36,13 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
           choiceGrouped: true,
           choiceStyle: S2ChoiceStyle(
             showCheckmark: true,
-            highlightColor: Theme.of(context).primaryColor.withOpacity(.4),
+            highlightColor: Theme.of(context).primaryColor
+                .withValues(alpha: .4),
           ),
           choiceActiveStyle: S2ChoiceStyle(
             raised: true,
-            highlightColor: Theme.of(context).colorScheme.secondary.withOpacity(.4),
+            highlightColor: Theme.of(context).colorScheme.secondary
+                .withValues(alpha: .4),
           ),
           choiceSecondaryBuilder: (context, state, choice) => CircleAvatar(
             backgroundImage: NetworkImage(choice.meta['picture']['thumbnail']),
@@ -53,9 +57,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
                   String avatarUrl = state.selected.choice != null
                       ? state.selected.choice?.meta['picture']['thumbnail']
                       : 'https://source.unsplash.com/8I-ht65iRww/100x100';
-                  return CircleAvatar(
-                    backgroundImage: NetworkImage(avatarUrl),
-                  );
+                  return CircleAvatar(backgroundImage: NetworkImage(avatarUrl));
                 },
               ),
             );
@@ -64,7 +66,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
         const Divider(indent: 20),
         FutureBuilder<List<S2Choice<String>>>(
           initialData: [],
-          future: this._countriesMemoizer.runOnce(_getCountries),
+          future: _countriesMemoizer.runOnce(_getCountries),
           builder: (context, snapshot) {
             return SmartSelect<String>.multiple(
               title: 'Country',
@@ -80,7 +82,8 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
                 return S2Tile.fromState(
                   state,
                   isTwoLine: true,
-                  isLoading: snapshot.connectionState == ConnectionState.waiting,
+                  isLoading:
+                      snapshot.connectionState == ConnectionState.waiting,
                   leading: const SizedBox(
                     width: 40,
                     height: 40,
@@ -103,10 +106,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
           //   ));
           // },
           choiceLoader: (info) {
-            return _getUsers(
-              limit: info.limit ?? 20,
-              page: info.page ?? 0,
-            );
+            return _getUsers(limit: info.limit ?? 20, page: info.page ?? 0);
           },
           choiceConfig: const S2ChoiceConfig(
             type: S2ChoiceType.cards,
@@ -160,9 +160,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
             pageLimit: 17,
           ),
           choiceSecondaryBuilder: (context, state, choice) {
-            return CircleAvatar(
-              backgroundImage: NetworkImage(choice.meta),
-            );
+            return CircleAvatar(backgroundImage: NetworkImage(choice.meta));
           },
           onChange: (selected) {
             setState(() => _invitations = selected.value);
@@ -197,7 +195,7 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
       final choices = await _getUsers();
       setState(() => _users = choices);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     } finally {
       setState(() => _usersIsLoading = false);
     }
@@ -219,7 +217,8 @@ class _FeaturesOptionAsyncState extends State<FeaturesOptionAsync> {
     return S2Choice.listFrom<String, dynamic>(
       source: res.data['results'],
       value: (index, item) => item['email'],
-      title: (index, item) => item['name']['first'] + ' ' + item['name']['last'],
+      title: (index, item) =>
+          "${item['name']['first']} ${item['name']['last']}",
       subtitle: (index, item) => item['email'],
       group: (index, item) => item['gender'],
       meta: (index, item) => item,

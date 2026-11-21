@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+
 import 'features_single/single_main.dart';
 import 'features_multi/multi_main.dart';
 import 'features_tile/tile_main.dart';
@@ -11,6 +12,8 @@ import 'features_color.dart';
 import 'keep_alive.dart';
 
 class Features extends StatelessWidget {
+  const Features({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -37,29 +40,17 @@ class Features extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.help_outline),
               onPressed: () => _about(context),
-            )
+            ),
           ],
         ),
         body: TabBarView(
           children: [
-            KeepAliveWidget(
-              child: FeaturesSingle(),
-            ),
-            KeepAliveWidget(
-              child: FeaturesMulti(),
-            ),
-            KeepAliveWidget(
-              child: FeaturesOption(),
-            ),
-            KeepAliveWidget(
-              child: FeaturesChoices(),
-            ),
-            KeepAliveWidget(
-              child: FeaturesModal(),
-            ),
-            KeepAliveWidget(
-              child: FeaturesTile(),
-            ),
+            KeepAliveWidget(child: FeaturesSingle()),
+            KeepAliveWidget(child: FeaturesMulti()),
+            KeepAliveWidget(child: FeaturesOption()),
+            KeepAliveWidget(child: FeaturesChoices()),
+            KeepAliveWidget(child: FeaturesModal()),
+            KeepAliveWidget(child: FeaturesTile()),
           ],
         ),
         // bottomNavigationBar: Card(
@@ -104,7 +95,7 @@ class Features extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

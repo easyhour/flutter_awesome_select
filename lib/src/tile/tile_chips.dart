@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+
 import '../chip_theme.dart';
 
 /// Chips tile/trigger widget
@@ -60,7 +61,7 @@ class S2TileChips extends StatelessWidget {
 
   /// Create a chips tile/trigger widget
   const S2TileChips({
-    Key? key,
+    super.key,
     required this.chipLength,
     required this.chipLabelBuilder,
     this.chipAvatarBuilder,
@@ -79,11 +80,15 @@ class S2TileChips extends StatelessWidget {
     this.placeholder,
     this.scrollable = false,
     this.padding,
-  }) : super(key: key);
+  });
 
   /// default padding
-  static const EdgeInsetsGeometry defaultPadding =
-      EdgeInsets.fromLTRB(15, 0, 15, 10);
+  static const EdgeInsetsGeometry defaultPadding = EdgeInsets.fromLTRB(
+    15,
+    0,
+    15,
+    10,
+  );
 
   /// default placeholder
   static final Widget defaultPlaceholder = Container();
@@ -92,8 +97,8 @@ class S2TileChips extends StatelessWidget {
   Widget build(BuildContext context) {
     return chipLength > 0
         ? scrollable
-            ? _chipScrollable(context)
-            : _chipWrapped(context)
+              ? _chipScrollable(context)
+              : _chipWrapped(context)
         : placeholder ?? defaultPlaceholder;
   }
 
@@ -137,26 +142,22 @@ class S2TileChips extends StatelessWidget {
   }
 
   List<Widget> _chipList(BuildContext context) {
-    return List<Widget>.generate(
-      chipLength,
-      (i) {
-        // build chip widget
-        Widget chip =
-            chipBuilder?.call(context, i) ?? _chipGenerator(context, i);
+    return List<Widget>.generate(chipLength, (i) {
+      // build chip widget
+      Widget chip = chipBuilder?.call(context, i) ?? _chipGenerator(context, i);
 
-        // add spacing if chip is scrollable
-        if (scrollable) {
-          chip = Padding(
-            padding: EdgeInsets.only(
-              right: i < chipLength - 1 ? chipSpacing ?? 7 : 0,
-            ),
-            child: chip,
-          );
-        }
+      // add spacing if chip is scrollable
+      if (scrollable) {
+        chip = Padding(
+          padding: EdgeInsets.only(
+            right: i < chipLength - 1 ? chipSpacing ?? 7 : 0,
+          ),
+          child: chip,
+        );
+      }
 
-        return chip;
-      },
-    ).toList();
+      return chip;
+    }).toList();
   }
 
   Widget _chipGenerator(BuildContext context, int i) {

@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:awesome_select/awesome_select.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:brilliant_select/brilliant_select.dart';
+
 import '../widgets/icon_badge.dart';
 import '../choices.dart' as choices;
 
 class FeaturesChoicesTheme extends StatefulWidget {
+  const FeaturesChoicesTheme({super.key});
+
   @override
-  _FeaturesChoicesThemeState createState() => _FeaturesChoicesThemeState();
+  State<FeaturesChoicesTheme> createState() => _FeaturesChoicesThemeState();
 }
 
 class _FeaturesChoicesThemeState extends State<FeaturesChoicesTheme> {
@@ -40,9 +43,7 @@ class _FeaturesChoicesThemeState extends State<FeaturesChoicesTheme> {
               ),
               color: Colors.white,
             ),
-            activeStyle: const S2ChoiceStyle(
-              color: Colors.green,
-            ),
+            activeStyle: const S2ChoiceStyle(color: Colors.green),
           ),
           groupEnabled: true,
           groupHeaderStyle: S2GroupHeaderStyle(
@@ -52,9 +53,7 @@ class _FeaturesChoicesThemeState extends State<FeaturesChoicesTheme> {
           modalConfig: S2ModalConfig(
             type: S2ModalType.fullPage,
             useFilter: true,
-            style: S2ModalStyle(
-              backgroundColor: Colors.blueGrey[800],
-            ),
+            style: S2ModalStyle(backgroundColor: Colors.blueGrey[800]),
             headerStyle: const S2ModalHeaderStyle(
               elevation: 4,
               centerTitle: true,
