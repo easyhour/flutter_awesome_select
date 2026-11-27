@@ -1,6 +1,6 @@
 name: brilliant_select
 description: Customizable single and multiple selection widgets with search, grouping, dialogs and bottom sheets for Flutter.
-version: 7.0.0
+version: 7.0.1
 repository: https://github.com/easyhour/flutter_awesome_select
 homepage: https://github.com/easyhour/flutter_awesome_select
 issue_tracker: https://github.com/easyhour/flutter_awesome_select/issues

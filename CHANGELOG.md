@@ -1,3 +1,7 @@
+## 7.0.1
+
+- Refresh pub.dev analysis after correcting the repository default branch to expose this package.
+
 ## 7.0.0
 
 - First public release under the `brilliant_select` package name, forked from `awesome_select`.
